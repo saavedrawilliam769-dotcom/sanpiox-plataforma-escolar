@@ -40,12 +40,10 @@
             margin-top: 0;
             color: var(--color-primario);
             font-size: 1.4rem;
-            text-align: center;
         }
         .acceso-card p {
             font-size: 0.9rem;
             color: #555;
-            text-align: center;
         }
         .acceso-group {
             margin-top: 15px;
@@ -91,7 +89,10 @@
             color: #b71c1c;
             font-size: 0.8rem;
             min-height: 16px;
-            text-align: center;
+        }
+        .acceso-ver-clave {
+            margin-top: 5px;
+            font-size: 0.8rem;
         }
 
         header {
@@ -334,6 +335,9 @@
         <div class="acceso-group">
             <label for="codigoAcceso">Código de acceso</label>
             <input type="password" id="codigoAcceso" class="acceso-input" placeholder="Ingrese el código">
+            <div class="acceso-ver-clave">
+                <label><input type="checkbox" id="toggleVerClave"> Mostrar caracteres</label>
+            </div>
         </div>
 
         <button class="acceso-boton" id="btnIngresar">Ingresar</button>
@@ -597,9 +601,21 @@
             <h2>Asistencia - 2ºA y 2ºB</h2>
             <p class="info" id="textoAsistencia">
                 Registro centralizado de asistencia de Lunes a Viernes para toda la nómina de estudiantes.  
-                Para docentes: puede marcar Presente, Atraso o Falta.  
-                Para familias: solo se muestra la asistencia del estudiante.
+                Docentes: seleccionan día y paralelo para controlar la asistencia (Presente, Atraso o Falta).  
+                Familias: solo se muestra la asistencia del estudiante.
             </p>
+
+            <div class="filtros" id="filtrosAsistencia">
+                <label for="selectDiaAsistencia">Día:</label>
+                <select id="selectDiaAsistencia"></select>
+
+                <label for="selectParaleloAsistencia">Paralelo:</label>
+                <select id="selectParaleloAsistencia">
+                    <option value="">Todos</option>
+                    <option value="2ºA">2ºA</option>
+                    <option value="2ºB">2ºB</option>
+                </select>
+            </div>
 
             <table class="tabla" id="tablaAsistencia">
                 <thead>
@@ -674,16 +690,19 @@
                     </div>
                 </div>
 
-                <!-- Bloque exportación JSON -->
+                <!-- Bloque exportación/guardado -->
                 <div class="panel-card">
-                    <h3>Respaldo de datos (JSON)</h3>
+                    <h3>Respaldo de datos</h3>
                     <p class="panel-ayuda">
-                        Use este botón para descargar todas las notas, asistencias y estados de tareas.
+                        Use estos botones para respaldar y recuperar todas las notas, asistencias y estados de tareas.
                     </p>
                     <button type="button" id="btnDescargarJSON">Descargar datos (JSON)</button>
+                    <button type="button" id="btnDescargarCSV">Descargar datos (CSV)</button>
+                    <button type="button" id="btnGuardarLocal">Guardar datos en esta computadora</button>
+                    <button type="button" id="btnCargarLocal">Cargar datos guardados</button>
                     <p class="panel-ayuda">
-                        Luego puede abrir ese archivo y copiar/pegar los arreglos en el código fuente
-                        para guardar cambios de forma permanente.
+                        El guardado en computadora funciona por navegador.  
+                        Si usa otra PC o borra los datos del navegador, el respaldo recomendado es el archivo JSON/CSV.
                     </p>
                 </div>
             </div>
@@ -1154,13 +1173,22 @@ function renderTablaNotas(tablaId, datos, filtros = {}) {
     });
 }
 
-function renderTablaAsistencia(filtroNombre = "") {
+// Render asistencia con filtros: nombre, día, paralelo
+function renderTablaAsistencia(filtros = {}) {
     const tbody = document.querySelector("#tablaAsistencia tbody");
     tbody.innerHTML = "";
 
-    let datosFiltrados = filtroNombre
-        ? datosAsistencia.filter(d => d.alumno === filtroNombre)
-        : datosAsistencia;
+    let datosFiltrados = datosAsistencia;
+
+    if (filtros.nombre) {
+        datosFiltrados = datosFiltrados.filter(d => d.alumno === filtros.nombre);
+    }
+    if (filtros.dia) {
+        datosFiltrados = datosFiltrados.filter(d => d.dia === filtros.dia);
+    }
+    if (filtros.paralelo) {
+        datosFiltrados = datosFiltrados.filter(d => d.paralelo === filtros.paralelo);
+    }
 
     if (datosFiltrados.length === 0) {
         const fila = document.createElement("tr");
@@ -1390,9 +1418,15 @@ function configurarVistaDocente() {
     document.getElementById("linkTareas2A").style.display = "inline-block";
     document.getElementById("linkTareas2B").style.display = "inline-block";
 
+    // Reset filtros asistencia
+    const diaSel = document.getElementById("selectDiaAsistencia");
+    const parSel = document.getElementById("selectParaleloAsistencia");
+    if (diaSel) diaSel.value = "";
+    if (parSel) parSel.value = "";
+
     actualizarNotas2A();
     actualizarNotas2B();
-    renderTablaAsistencia("");
+    renderTablaAsistencia({});
 
     renderTablaTareas("2ºA", "todas");
     renderTablaTareas("2ºB", "todas");
@@ -1451,7 +1485,10 @@ function configurarVistaFamilia() {
         renderTablaTareas("2ºB", "todas");
     }
 
-    renderTablaAsistencia(alumnoActual);
+    // Para familias: asistencia solo del estudiante, pero puede filtrar por día
+    const diaSel = document.getElementById("selectDiaAsistencia");
+    if (diaSel) diaSel.value = "";
+    renderTablaAsistencia({ nombre: alumnoActual });
 }
 
 // Manejo de acceso
@@ -1485,6 +1522,12 @@ document.getElementById("btnIngresar").addEventListener("click", () => {
         document.getElementById("app").style.display = "block";
         configurarVistaFamilia();
     }
+});
+
+// Mostrar/ocultar clave
+document.getElementById("toggleVerClave").addEventListener("change", (e) => {
+    const input = document.getElementById("codigoAcceso");
+    input.type = e.target.checked ? "text" : "password";
 });
 
 // Panel docente: lista de alumnos según paralelo
@@ -1612,6 +1655,98 @@ function descargarJSONDatos() {
     URL.revokeObjectURL(url);
 }
 
+// Descargar CSV genérico
+function descargarCSV(datos, nombreArchivo) {
+    if (!datos || datos.length === 0) {
+        alert(`No hay datos para ${nombreArchivo}`);
+        return;
+    }
+
+    const filas = [];
+    const encabezados = Object.keys(datos[0]);
+    filas.push(encabezados.join(","));
+
+    datos.forEach(obj => {
+        const fila = encabezados.map(k => {
+            const valor = obj[k] ?? "";
+            // Escapar comillas y separar por comas
+            return `"${String(valor).replace(/"/g, '""')}"`;
+        }).join(",");
+        filas.push(fila);
+    });
+
+    const contenido = filas.join("\n");
+    const blob = new Blob([contenido], { type: "text/csv" });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = nombreArchivo;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+}
+
+// Guardar datos en localStorage
+function guardarDatosLocal() {
+    const datos = {
+        notas2A: datosNotas2A,
+        notas2B: datosNotas2B,
+        asistencia: datosAsistencia,
+        estadoTareas2A: estadoTareas2A,
+        estadoTareas2B: estadoTareas2B
+    };
+    localStorage.setItem("sanpiox_datos", JSON.stringify(datos));
+    alert("Datos guardados correctamente en esta computadora (navegador actual).");
+}
+
+// Cargar datos desde localStorage
+function cargarDatosLocal() {
+    const datosGuardados = localStorage.getItem("sanpiox_datos");
+    if (!datosGuardados) {
+        alert("No hay datos guardados en esta computadora.");
+        return;
+    }
+    const datos = JSON.parse(datosGuardados);
+
+    // Restaurar cada arreglo (vaciando y llenando)
+    datosNotas2A.length = 0;
+    datosNotas2A.push(...(datos.notas2A || []));
+
+    datosNotas2B.length = 0;
+    datosNotas2B.push(...(datos.notas2B || []));
+
+    datosAsistencia.length = 0;
+    datosAsistencia.push(...(datos.asistencia || []));
+
+    estadoTareas2A.length = 0;
+    estadoTareas2A.push(...(datos.estadoTareas2A || []));
+
+    estadoTareas2B.length = 0;
+    estadoTareas2B.push(...(datos.estadoTareas2B || []));
+
+    // Refrescar vistas según rol
+    if (rolActual === "docente") {
+        actualizarNotas2A();
+        actualizarNotas2B();
+        renderTablaAsistencia({});
+        renderTablaTareas("2ºA", "todas");
+        renderTablaTareas("2ºB", "todas");
+    } else if (rolActual === "familia") {
+        if (paraleloActual === "2ºA") {
+            actualizarNotas2A();
+            renderTablaTareas("2ºA", "todas");
+        } else if (paraleloActual === "2ºB") {
+            actualizarNotas2B();
+            renderTablaTareas("2ºB", "todas");
+        }
+        renderTablaAsistencia({ nombre: alumnoActual });
+    }
+
+    alert("Datos cargados correctamente desde la computadora.");
+}
+
 // Inicialización
 document.addEventListener("DOMContentLoaded", () => {
     // Inicializar asistencia (lunes a viernes)
@@ -1620,6 +1755,49 @@ document.addEventListener("DOMContentLoaded", () => {
     // Selectores de alumnos para notas (modo docente)
     llenarSelectAlumnos("filtroAlumno2A", datosNotas2A);
     llenarSelectAlumnos("filtroAlumno2B", datosNotas2B);
+
+    // Llenar select de días para asistencia
+    const selDia = document.getElementById("selectDiaAsistencia");
+    if (selDia) {
+        const optTodos = document.createElement("option");
+        optTodos.value = "";
+        optTodos.textContent = "Todos";
+        selDia.appendChild(optTodos);
+
+        diasSemana.forEach(dia => {
+            const opt = document.createElement("option");
+            opt.value = dia;
+            opt.textContent = dia;
+            selDia.appendChild(opt);
+        });
+
+        selDia.addEventListener("change", () => {
+            const dia = selDia.value || undefined;
+            const parSel = document.getElementById("selectParaleloAsistencia");
+            const paralelo = parSel ? (parSel.value || undefined) : undefined;
+
+            if (rolActual === "docente") {
+                renderTablaAsistencia({ dia, paralelo });
+            } else if (rolActual === "familia") {
+                renderTablaAsistencia({ nombre: alumnoActual, dia, paralelo: paraleloActual });
+            }
+        });
+    }
+
+    const selPar = document.getElementById("selectParaleloAsistencia");
+    if (selPar) {
+        selPar.addEventListener("change", () => {
+            const par = selPar.value || undefined;
+            const diaSel = document.getElementById("selectDiaAsistencia");
+            const dia = diaSel ? (diaSel.value || undefined) : undefined;
+
+            if (rolActual === "docente") {
+                renderTablaAsistencia({ dia, paralelo: par });
+            } else if (rolActual === "familia") {
+                renderTablaAsistencia({ nombre: alumnoActual, dia, paralelo: paraleloActual });
+            }
+        });
+    }
 
     // Listeners filtros notas 2ºA
     document.getElementById("filtroAlumno2A").addEventListener("change", actualizarNotas2A);
@@ -1644,11 +1822,21 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("panelParalelo").addEventListener("change", actualizarListaPanelAlumnos);
     document.getElementById("btnGuardarNota").addEventListener("click", guardarNotaDesdePanel);
     document.getElementById("btnDescargarJSON").addEventListener("click", descargarJSONDatos);
+    document.getElementById("btnDescargarCSV").addEventListener("click", () => {
+        descargarCSV(datosNotas2A, "notas_2A.csv");
+        descargarCSV(datosNotas2B, "notas_2B.csv");
+        descargarCSV(datosAsistencia, "asistencia.csv");
+        descargarCSV(estadoTareas2A, "tareas_2A.csv");
+        descargarCSV(estadoTareas2B, "tareas_2B.csv");
+        alert("Se han descargado los archivos CSV (notas, asistencia y tareas).");
+    });
+    document.getElementById("btnGuardarLocal").addEventListener("click", guardarDatosLocal);
+    document.getElementById("btnCargarLocal").addEventListener("click", cargarDatosLocal);
 
     // Inicial: tablas base (aunque no visibles hasta ingresar)
     renderTablaNotas("tablaNotas2A", datosNotas2A, {});
     renderTablaNotas("tablaNotas2B", datosNotas2B, {});
-    renderTablaAsistencia("");
+    renderTablaAsistencia({});
 
     renderTablaTareas("2ºA", "todas");
     renderTablaTareas("2ºB", "todas");
