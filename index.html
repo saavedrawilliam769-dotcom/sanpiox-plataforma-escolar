@@ -388,9 +388,9 @@
             </p>
             <p>Desde aquí podrán revisar:</p>
             <ul>
-                <li>Notas por área y trimestre (Ser, Saber, Hacer, Decidir y nota final).</li>
-                <li>Tareas vigentes y fechas de entrega.</li>
-                <li>Asistencia y observaciones generales.</li>
+                <li>Notas por área y trimestre (Ser, Saber, Hacer, Decidir, Autoevaluación y promedio final).</li>
+                <li>Tareas vigentes y si fueron realizadas o no.</li>
+                <li>Asistencia diaria de lunes a viernes.</li>
                 <li>Comunicados y avisos importantes.</li>
                 <li>Material de apoyo para el estudio en casa.</li>
             </ul>
@@ -409,8 +409,10 @@
                     La plataforma diferencia entre <span class="badge">2ºA</span> y <span class="badge">2ºB</span>.
                 </li>
                 <li>
-                    <b>Actualización</b><br>
-                    Las notas se organizan por trimestre (1º y 2º) y por áreas.
+                    <b>Calificaciones</b><br>
+                    Las notas se organizan por trimestre y por áreas, considerando:
+                    Ser (5 pts), Saber (45), Hacer (40), Decidir (5) y Autoevaluación (5).
+                    La suma de estas cinco notas forma el <b>promedio final</b> (sobre 100 pts).
                 </li>
                 <li>
                     <b>Uso responsable</b><br>
@@ -427,7 +429,9 @@
         <section id="a-notas" class="card">
             <h2>Notas - 2ºA</h2>
             <p class="info" id="textoNotas2A">
-                Filtros de estudiante, trimestre y área. Las calificaciones se muestran por competencias: Ser, Saber, Hacer y Decidir.
+                Filtros de estudiante, trimestre y área. Las calificaciones se muestran por competencias:
+                Ser (5), Saber (45), Hacer (40), Decidir (5) y Autoevaluación (5).  
+                La nota mínima de aprobación es 51 puntos sobre 100.
             </p>
 
             <div class="filtros" id="filtros2A">
@@ -458,11 +462,12 @@
                         <th>Estudiante</th>
                         <th>Área</th>
                         <th>Trimestre</th>
-                        <th>Ser</th>
-                        <th>Saber</th>
-                        <th>Hacer</th>
-                        <th>Decidir</th>
-                        <th>Nota final</th>
+                        <th>Ser (5)</th>
+                        <th>Saber (45)</th>
+                        <th>Hacer (40)</th>
+                        <th>Decidir (5)</th>
+                        <th>Autoeval. (5)</th>
+                        <th>Promedio final (100)</th>
                         <th>Observación</th>
                     </tr>
                 </thead>
@@ -474,7 +479,9 @@
         <section id="b-notas" class="card">
             <h2>Notas - 2ºB</h2>
             <p class="info" id="textoNotas2B">
-                Filtros de estudiante, trimestre y área. Las calificaciones se muestran por competencias: Ser, Saber, Hacer y Decidir.
+                Filtros de estudiante, trimestre y área. Las calificaciones se muestran por competencias:
+                Ser (5), Saber (45), Hacer (40), Decidir (5) y Autoevaluación (5).  
+                La nota mínima de aprobación es 51 puntos sobre 100.
             </p>
 
             <div class="filtros" id="filtros2B">
@@ -505,11 +512,12 @@
                         <th>Estudiante</th>
                         <th>Área</th>
                         <th>Trimestre</th>
-                        <th>Ser</th>
-                        <th>Saber</th>
-                        <th>Hacer</th>
-                        <th>Decidir</th>
-                        <th>Nota final</th>
+                        <th>Ser (5)</th>
+                        <th>Saber (45)</th>
+                        <th>Hacer (40)</th>
+                        <th>Decidir (5)</th>
+                        <th>Autoeval. (5)</th>
+                        <th>Promedio final (100)</th>
                         <th>Observación</th>
                     </tr>
                 </thead>
@@ -520,7 +528,7 @@
         <!-- TAREAS 2ºA -->
         <section id="a-tareas" class="card">
             <h2>Tareas - 2ºA</h2>
-            <p class="info">Tareas generales del paralelo 2ºA.</p>
+            <p class="info">Tareas generales del paralelo 2ºA. Puede marcar si la tarea fue realizada o no.</p>
 
             <div class="filtros">
                 <button type="button" class="btn-tareas" data-target="tablaTareas2A" data-modo="recientes">
@@ -539,6 +547,7 @@
                         <th>Área</th>
                         <th>Descripción</th>
                         <th>Materiales</th>
+                        <th>Realizada</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -548,6 +557,7 @@
                         <td>Matemática</td>
                         <td>Resolver 5 ejercicios de suma y resta.</td>
                         <td>Cuaderno, lápiz, borrador</td>
+                        <td style="text-align:center;"><input type="checkbox"></td>
                     </tr>
                     <tr>
                         <td>10/11/2025</td>
@@ -555,6 +565,7 @@
                         <td>Lenguaje</td>
                         <td>Redactar una pequeña descripción de su familia.</td>
                         <td>Cuaderno, lápiz</td>
+                        <td style="text-align:center;"><input type="checkbox"></td>
                     </tr>
                 </tbody>
             </table>
@@ -563,7 +574,7 @@
         <!-- TAREAS 2ºB -->
         <section id="b-tareas" class="card">
             <h2>Tareas - 2ºB</h2>
-            <p class="info">Tareas generales del paralelo 2ºB.</p>
+            <p class="info">Tareas generales del paralelo 2ºB. Puede marcar si la tarea fue realizada o no.</p>
 
             <div class="filtros">
                 <button type="button" class="btn-tareas" data-target="tablaTareas2B" data-modo="recientes">
@@ -582,6 +593,7 @@
                         <th>Área</th>
                         <th>Descripción</th>
                         <th>Materiales</th>
+                        <th>Realizada</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -591,6 +603,7 @@
                         <td>Ciencias Naturales</td>
                         <td>Dibujar una planta y señalar sus partes.</td>
                         <td>Hoja, colores</td>
+                        <td style="text-align:center;"><input type="checkbox"></td>
                     </tr>
                     <tr>
                         <td>11/11/2025</td>
@@ -598,6 +611,7 @@
                         <td>Ciencias Sociales</td>
                         <td>Investigar una costumbre de su comunidad.</td>
                         <td>Cuaderno, lápiz</td>
+                        <td style="text-align:center;"><input type="checkbox"></td>
                     </tr>
                 </tbody>
             </table>
@@ -607,13 +621,15 @@
         <section id="asistencia" class="card">
             <h2>Asistencia - 2ºA y 2ºB</h2>
             <p class="info" id="textoAsistencia">
-                Para docentes: puede marcar Presente, Atraso o Falta. Para familias: solo se muestra la asistencia del estudiante.
+                Registro centralizado de asistencia de lunes a viernes para todos los estudiantes.  
+                Para docentes: puede marcar Presente, Atraso o Falta.  
+                Para familias: solo se muestra la asistencia del estudiante.
             </p>
 
             <table class="tabla" id="tablaAsistencia">
                 <thead>
                     <tr>
-                        <th>Fecha</th>
+                        <th>Día</th>
                         <th>Estudiante</th>
                         <th>Paralelo</th>
                         <th>Estado</th>
@@ -662,22 +678,25 @@
                         <option value="Artes Plásticas">Artes Plásticas</option>
                     </select>
 
-                    <label>Ser</label>
-                    <input type="number" id="panelSer" min="0" max="100" step="1" placeholder="0 a 100">
+                    <label>Ser (0–5)</label>
+                    <input type="number" id="panelSer" min="0" max="5" step="1" placeholder="0 a 5">
 
-                    <label>Saber</label>
-                    <input type="number" id="panelSaber" min="0" max="100" step="1" placeholder="0 a 100">
+                    <label>Saber (0–45)</label>
+                    <input type="number" id="panelSaber" min="0" max="45" step="1" placeholder="0 a 45">
 
-                    <label>Hacer</label>
-                    <input type="number" id="panelHacer" min="0" max="100" step="1" placeholder="0 a 100">
+                    <label>Hacer (0–40)</label>
+                    <input type="number" id="panelHacer" min="0" max="40" step="1" placeholder="0 a 40">
 
-                    <label>Decidir</label>
-                    <input type="number" id="panelDecidir" min="0" max="100" step="1" placeholder="0 a 100">
+                    <label>Decidir (0–5)</label>
+                    <input type="number" id="panelDecidir" min="0" max="5" step="1" placeholder="0 a 5">
+
+                    <label>Autoevaluación (0–5)</label>
+                    <input type="number" id="panelAutoeval" min="0" max="5" step="1" placeholder="0 a 5">
 
                     <button type="button" id="btnGuardarNota">Guardar nota</button>
                     <div class="panel-ayuda">
-                        La nota final se calcula automáticamente como promedio de Ser, Saber, Hacer y Decidir.
-                        La observación también se genera según la nota final.
+                        El promedio final se calcula automáticamente como suma de las cinco notas (máximo 100).
+                        La observación se genera según el promedio final, con mensajes positivos de refuerzo.
                     </div>
                 </div>
 
@@ -880,33 +899,38 @@ const areasCalificacion = [
 
 const trimestresCalificacion = ["1º", "2º"];
 
-// Arreglos de notas (se llenan con datos ficticios)
+// Arreglos de notas
 const datosNotas2A = [];
 const datosNotas2B = [];
 
-// Generar observación según nota
+// Nota mínima de aprobación
+const NOTA_APROBACION = 51;
+
+// Generar observación positiva según nota
 function generarObservacion(nota, area) {
-    if (nota >= 60) {
-        return `Estudiante aprobado en ${area}. Se recomienda continuar fortaleciendo sus logros y mantener el compromiso.`;
+    if (nota >= NOTA_APROBACION) {
+        return `Buen desempeño en ${area}. El estudiante está aprobado; se recomienda continuar con el mismo esfuerzo y seguir fortaleciendo sus habilidades.`;
     } else {
-        return `Nota por debajo de lo esperado en ${area}. Se sugiere reforzar las tareas, el estudio en casa y pedir apoyo cuando lo necesite.`;
+        return `En ${area} se observan aspectos por mejorar. Se sugiere seguir practicando con calma, pedir ayuda cuando lo necesite y valorar cada avance que va logrando.`;
     }
+}
+
+// Aleatorio entero entre min y max (incluidos)
+function randInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 // Generar datos ficticios para todos los estudiantes (1º y 2º trimestre, todas las áreas)
 function generarNotasIniciales() {
-    function randomNota() {
-        return Math.floor(Math.random() * 100) + 1; // 1 a 100
-    }
-
     alumnos2A.forEach(alumno => {
         trimestresCalificacion.forEach(trim => {
             areasCalificacion.forEach(area => {
-                const ser = randomNota();
-                const saber = randomNota();
-                const hacer = randomNota();
-                const decidir = randomNota();
-                const notaFinal = Math.round((ser + saber + hacer + decidir) / 4);
+                const ser = randInt(1, 5);
+                const saber = randInt(1, 45);
+                const hacer = randInt(1, 40);
+                const decidir = randInt(1, 5);
+                const autoeval = randInt(1, 5);
+                const notaFinal = ser + saber + hacer + decidir + autoeval;
                 const obs = generarObservacion(notaFinal, area);
 
                 datosNotas2A.push({
@@ -917,6 +941,7 @@ function generarNotasIniciales() {
                     saber,
                     hacer,
                     decidir,
+                    autoeval,
                     nota: notaFinal,
                     obs
                 });
@@ -927,11 +952,12 @@ function generarNotasIniciales() {
     alumnos2B.forEach(alumno => {
         trimestresCalificacion.forEach(trim => {
             areasCalificacion.forEach(area => {
-                const ser = randomNota();
-                const saber = randomNota();
-                const hacer = randomNota();
-                const decidir = randomNota();
-                const notaFinal = Math.round((ser + saber + hacer + decidir) / 4);
+                const ser = randInt(1, 5);
+                const saber = randInt(1, 45);
+                const hacer = randInt(1, 40);
+                const decidir = randInt(1, 5);
+                const autoeval = randInt(1, 5);
+                const notaFinal = ser + saber + hacer + decidir + autoeval;
                 const obs = generarObservacion(notaFinal, area);
 
                 datosNotas2B.push({
@@ -942,6 +968,7 @@ function generarNotasIniciales() {
                     saber,
                     hacer,
                     decidir,
+                    autoeval,
                     nota: notaFinal,
                     obs
                 });
@@ -953,13 +980,41 @@ function generarNotasIniciales() {
 // Generar datos ficticios al cargar el script
 generarNotasIniciales();
 
-// Asistencia (ejemplo, editable)
-const datosAsistencia = [
-    { id: 1, fecha: "25/11/2025", alumno: "Balderrama Choque Marcos Dyland", paralelo: "2ºA", estado: "Presente", obs: "" },
-    { id: 2, fecha: "25/11/2025", alumno: "Yamandiry Diaz  Liam  Abdiel", paralelo: "2ºA", estado: "Falta", obs: "Sin justificar" },
-    { id: 3, fecha: "25/11/2025", alumno: "AGUILAR VALENTINA MARGARITA", paralelo: "2ºB", estado: "Presente", obs: "" },
-    { id: 4, fecha: "25/11/2025", alumno: "ZELAYA SALAZAR VICTORIA MASSIEL", paralelo: "2ºB", estado: "Atraso", obs: "Justificada" }
-];
+// Asistencia: días de lunes a viernes
+const diasSemana = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"];
+let datosAsistencia = [];
+
+// Inicializar asistencia para todos los estudiantes y todos los días
+function inicializarAsistenciaSemana() {
+    datosAsistencia = [];
+    let id = 1;
+
+    alumnos2A.forEach(alumno => {
+        diasSemana.forEach(dia => {
+            datosAsistencia.push({
+                id: id++,
+                dia,
+                alumno,
+                paralelo: "2ºA",
+                estado: "Presente",
+                obs: ""
+            });
+        });
+    });
+
+    alumnos2B.forEach(alumno => {
+        diasSemana.forEach(dia => {
+            datosAsistencia.push({
+                id: id++,
+                dia,
+                alumno,
+                paralelo: "2ºB",
+                estado: "Presente",
+                obs: ""
+            });
+        });
+    });
+}
 
 // Utilidades
 function obtenerListaAlumnos(datos) {
@@ -1002,7 +1057,7 @@ function renderTablaNotas(tablaId, datos, filtros = {}) {
     if (datosFiltrados.length === 0) {
         const fila = document.createElement("tr");
         const celda = document.createElement("td");
-        celda.colSpan = 9;
+        celda.colSpan = 10;
         celda.textContent = "No hay registros para mostrar.";
         fila.appendChild(celda);
         tbody.appendChild(fila);
@@ -1040,6 +1095,10 @@ function renderTablaNotas(tablaId, datos, filtros = {}) {
         cDecidir.textContent = d.decidir;
         fila.appendChild(cDecidir);
 
+        const cAuto = document.createElement("td");
+        cAuto.textContent = d.autoeval;
+        fila.appendChild(cAuto);
+
         const cNota = document.createElement("td");
         cNota.textContent = d.nota;
         fila.appendChild(cNota);
@@ -1073,9 +1132,9 @@ function renderTablaAsistencia(filtroNombre = "") {
     datosFiltrados.forEach(d => {
         const fila = document.createElement("tr");
 
-        const cFecha = document.createElement("td");
-        cFecha.textContent = d.fecha;
-        fila.appendChild(cFecha);
+        const cDia = document.createElement("td");
+        cDia.textContent = d.dia;
+        fila.appendChild(cDia);
 
         const cAlumno = document.createElement("td");
         cAlumno.textContent = d.alumno;
@@ -1306,7 +1365,7 @@ function actualizarListaPanelAlumnos() {
     });
 }
 
-// Panel docente: guardar/actualizar nota (Ser, Saber, Hacer, Decidir)
+// Panel docente: guardar/actualizar nota (Ser, Saber, Hacer, Decidir, Autoevaluación)
 function guardarNotaDesdePanel() {
     const paralelo = document.getElementById("panelParalelo").value;
     const alumno = document.getElementById("panelAlumno").value;
@@ -1317,9 +1376,10 @@ function guardarNotaDesdePanel() {
     const saberStr = document.getElementById("panelSaber").value.trim();
     const hacerStr = document.getElementById("panelHacer").value.trim();
     const decidirStr = document.getElementById("panelDecidir").value.trim();
+    const autoStr = document.getElementById("panelAutoeval").value.trim();
 
-    if (!alumno || !trimestre || !area || !serStr || !saberStr || !hacerStr || !decidirStr) {
-        alert("Complete paralelo, estudiante, trimestre, área y las cuatro notas (Ser, Saber, Hacer, Decidir).");
+    if (!alumno || !trimestre || !area || !serStr || !saberStr || !hacerStr || !decidirStr || !autoStr) {
+        alert("Complete paralelo, estudiante, trimestre, área y las cinco notas (Ser, Saber, Hacer, Decidir, Autoevaluación).");
         return;
     }
 
@@ -1327,13 +1387,21 @@ function guardarNotaDesdePanel() {
     const saber = Number(saberStr);
     const hacer = Number(hacerStr);
     const decidir = Number(decidirStr);
+    const autoeval = Number(autoStr);
 
-    if ([ser, saber, hacer, decidir].some(v => isNaN(v) || v < 0 || v > 100)) {
-        alert("Todas las notas deben ser números entre 0 y 100.");
+    const rangosValidos =
+        ser >= 0 && ser <= 5 &&
+        saber >= 0 && saber <= 45 &&
+        hacer >= 0 && hacer <= 40 &&
+        decidir >= 0 && decidir <= 5 &&
+        autoeval >= 0 && autoeval <= 5;
+
+    if (!rangosValidos) {
+        alert("Verifique que cada nota esté dentro de su rango permitido.");
         return;
     }
 
-    const notaFinal = Math.round((ser + saber + hacer + decidir) / 4);
+    const notaFinal = ser + saber + hacer + decidir + autoeval;
     const obs = generarObservacion(notaFinal, area);
 
     const arreglo = paralelo === "2ºA" ? datosNotas2A : datosNotas2B;
@@ -1350,6 +1418,7 @@ function guardarNotaDesdePanel() {
         existente.saber = saber;
         existente.hacer = hacer;
         existente.decidir = decidir;
+        existente.autoeval = autoeval;
         existente.nota = notaFinal;
         existente.obs = obs;
     } else {
@@ -1361,6 +1430,7 @@ function guardarNotaDesdePanel() {
             saber,
             hacer,
             decidir,
+            autoeval,
             nota: notaFinal,
             obs
         });
@@ -1370,7 +1440,7 @@ function guardarNotaDesdePanel() {
     actualizarNotas2A();
     actualizarNotas2B();
 
-    alert(`Nota registrada/actualizada. Nota final: ${notaFinal}`);
+    alert(`Nota registrada/actualizada. Promedio final: ${notaFinal}`);
 }
 
 // Panel docente: descargar JSON con notas y asistencia
@@ -1403,6 +1473,9 @@ function descargarJSONDatos() {
 
 // Inicialización
 document.addEventListener("DOMContentLoaded", () => {
+    // Inicializar asistencia (lunes a viernes)
+    inicializarAsistenciaSemana();
+
     // Selectores de alumnos para notas (modo docente)
     llenarSelectAlumnos("filtroAlumno2A", datosNotas2A);
     llenarSelectAlumnos("filtroAlumno2B", datosNotas2B);
