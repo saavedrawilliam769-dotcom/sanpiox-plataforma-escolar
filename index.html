@@ -21,8 +21,7 @@
         }
 
         /* Pantalla de acceso */
-        #pantalla-acceso,
-        #pantalla-seleccionar-estudiante {
+        #pantalla-acceso {
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -41,12 +40,6 @@
             margin-top: 0;
             color: var(--color-primario);
             font-size: 1.4rem;
-            text-align: center;
-        }
-        .acceso-card h2 {
-            margin-top: 0;
-            color: var(--color-primario);
-            font-size: 1.2rem;
             text-align: center;
         }
         .acceso-card p {
@@ -72,8 +65,7 @@
         .acceso-opciones label {
             font-weight: normal;
         }
-        .acceso-input,
-        .acceso-select {
+        .acceso-input {
             width: 100%;
             padding: 8px;
             font-size: 0.9rem;
@@ -238,6 +230,19 @@
             border-radius: 4px;
             margin-bottom: 15px;
         }
+        .btn-tareas {
+            padding: 6px 10px;
+            border-radius: 4px;
+            border: 1px solid var(--color-primario);
+            background: var(--color-blanco);
+            color: var(--color-primario);
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+        .btn-tareas:hover {
+            background: var(--color-secundario);
+            color: var(--color-blanco);
+        }
         footer {
             background: var(--color-primario);
             color: var(--color-blanco);
@@ -286,24 +291,6 @@
     </div>
 </section>
 
-<!-- PANTALLA PARA SELECCIONAR ESTUDIANTE (PADRES) -->
-<section id="pantalla-seleccionar-estudiante" style="display:none;">
-    <div class="acceso-card">
-        <h2>Seleccione al estudiante</h2>
-        <p>Elija el nombre de su hija o hijo para ver únicamente su información.</p>
-
-        <div class="acceso-group">
-            <label for="selectorEstudianteFamilia">Estudiante</label>
-            <select id="selectorEstudianteFamilia" class="acceso-select">
-                <!-- Se llena con JS -->
-            </select>
-        </div>
-
-        <button class="acceso-boton" id="btnContinuarFamilia">Continuar</button>
-        <div class="acceso-error" id="mensajeErrorFamilia"></div>
-    </div>
-</section>
-
 <!-- APLICACIÓN PRINCIPAL -->
 <div id="app" style="display:none;">
     <header>
@@ -343,9 +330,7 @@
         <!-- BIENVENIDA -->
         <section id="bienvenida" class="card">
             <h2>Bienvenida</h2>
-            <p>
-                Estimadas madres y padres de familia:
-            </p>
+            <p>Estimadas madres y padres de familia:</p>
             <p>
                 Bienvenidos a la <b>San Pio X Plataforma Escolar</b>, un espacio para acompañar el proceso de aprendizaje
                 de sus hijas e hijos de <b>2º Año, paralelos A y B</b>.
@@ -369,9 +354,8 @@
                     Use el menú superior para ir a Notas, Tareas, Asistencia, Comunicados y Material de apoyo.
                 </li>
                 <li>
-                    <b>Paralelo correcto</b><br>
-                    La plataforma diferencia entre <span class="badge">2ºA</span> y <span class="badge">2ºB</span>
-                    según el curso de su hija o hijo.
+                    <b>Paralelo</b><br>
+                    La plataforma diferencia entre <span class="badge">2ºA</span> y <span class="badge">2ºB</span>.
                 </li>
                 <li>
                     <b>Actualización</b><br>
@@ -384,7 +368,7 @@
             </ol>
 
             <div class="alerta">
-                El acceso se realiza mediante códigos entregados por la unidad educativa.
+                Para familias, el código de acceso se basa en el primer apellido y nombre del estudiante.
             </div>
         </section>
 
@@ -392,12 +376,31 @@
         <section id="a-notas" class="card">
             <h2>Notas - 2ºA</h2>
             <p class="info" id="textoNotas2A">
-                Seleccione un estudiante para ver sus notas, o "Todos" para ver la lista completa.
+                Filtros de estudiante, trimestre y área.
             </p>
 
             <div class="filtros" id="filtros2A">
                 <label for="filtroAlumno2A">Estudiante:</label>
                 <select id="filtroAlumno2A"></select>
+
+                <label for="filtroTrimestre2A">Trimestre:</label>
+                <select id="filtroTrimestre2A">
+                    <option value="">Todos</option>
+                    <option value="1º">1º</option>
+                    <option value="2º">2º</option>
+                    <option value="3º">3º</option>
+                </select>
+
+                <label for="filtroArea2A">Área:</label>
+                <select id="filtroArea2A">
+                    <option value="">Todas</option>
+                    <option value="General">General</option>
+                    <option value="Matemática">Matemática</option>
+                    <option value="Lenguaje">Lenguaje</option>
+                    <option value="Ciencias Sociales">Ciencias Sociales</option>
+                    <option value="Ciencias Naturales">Ciencias Naturales</option>
+                    <option value="Artes Plásticas">Artes Plásticas</option>
+                </select>
             </div>
 
             <table class="tabla" id="tablaNotas2A">
@@ -418,12 +421,31 @@
         <section id="b-notas" class="card">
             <h2>Notas - 2ºB</h2>
             <p class="info" id="textoNotas2B">
-                Seleccione un estudiante para ver sus notas, o "Todos" para ver la lista completa.
+                Filtros de estudiante, trimestre y área.
             </p>
 
             <div class="filtros" id="filtros2B">
                 <label for="filtroAlumno2B">Estudiante:</label>
                 <select id="filtroAlumno2B"></select>
+
+                <label for="filtroTrimestre2B">Trimestre:</label>
+                <select id="filtroTrimestre2B">
+                    <option value="">Todos</option>
+                    <option value="1º">1º</option>
+                    <option value="2º">2º</option>
+                    <option value="3º">3º</option>
+                </select>
+
+                <label for="filtroArea2B">Área:</label>
+                <select id="filtroArea2B">
+                    <option value="">Todas</option>
+                    <option value="General">General</option>
+                    <option value="Matemática">Matemática</option>
+                    <option value="Lenguaje">Lenguaje</option>
+                    <option value="Ciencias Sociales">Ciencias Sociales</option>
+                    <option value="Ciencias Naturales">Ciencias Naturales</option>
+                    <option value="Artes Plásticas">Artes Plásticas</option>
+                </select>
             </div>
 
             <table class="tabla" id="tablaNotas2B">
@@ -445,7 +467,16 @@
             <h2>Tareas - 2ºA</h2>
             <p class="info">Tareas generales del paralelo 2ºA.</p>
 
-            <table class="tabla">
+            <div class="filtros">
+                <button type="button" class="btn-tareas" data-target="tablaTareas2A" data-modo="recientes">
+                    Tareas recientes (7 días)
+                </button>
+                <button type="button" class="btn-tareas" data-target="tablaTareas2A" data-modo="todas">
+                    Todas las tareas
+                </button>
+            </div>
+
+            <table class="tabla" id="tablaTareas2A">
                 <thead>
                     <tr>
                         <th>Fecha asignación</th>
@@ -457,10 +488,17 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>25/11/2025</td>
-                        <td>27/11/2025</td>
-                        <td>Comunicación</td>
-                        <td>Escribir 3 oraciones sobre su familia.</td>
+                        <td>20/11/2025</td>
+                        <td>22/11/2025</td>
+                        <td>Matemática</td>
+                        <td>Resolver 5 ejercicios de suma y resta.</td>
+                        <td>Cuaderno, lápiz, borrador</td>
+                    </tr>
+                    <tr>
+                        <td>10/11/2025</td>
+                        <td>13/11/2025</td>
+                        <td>Lenguaje</td>
+                        <td>Redactar una pequeña descripción de su familia.</td>
                         <td>Cuaderno, lápiz</td>
                     </tr>
                 </tbody>
@@ -472,7 +510,16 @@
             <h2>Tareas - 2ºB</h2>
             <p class="info">Tareas generales del paralelo 2ºB.</p>
 
-            <table class="tabla">
+            <div class="filtros">
+                <button type="button" class="btn-tareas" data-target="tablaTareas2B" data-modo="recientes">
+                    Tareas recientes (7 días)
+                </button>
+                <button type="button" class="btn-tareas" data-target="tablaTareas2B" data-modo="todas">
+                    Todas las tareas
+                </button>
+            </div>
+
+            <table class="tabla" id="tablaTareas2B">
                 <thead>
                     <tr>
                         <th>Fecha asignación</th>
@@ -484,11 +531,18 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>26/11/2025</td>
-                        <td>28/11/2025</td>
-                        <td>Matemática</td>
-                        <td>Resolver 5 ejercicios de suma y resta.</td>
-                        <td>Cuaderno, lápiz, borrador</td>
+                        <td>21/11/2025</td>
+                        <td>24/11/2025</td>
+                        <td>Ciencias Naturales</td>
+                        <td>Dibujar una planta y señalar sus partes.</td>
+                        <td>Hoja, colores</td>
+                    </tr>
+                    <tr>
+                        <td>11/11/2025</td>
+                        <td>14/11/2025</td>
+                        <td>Ciencias Sociales</td>
+                        <td>Investigar una costumbre de su comunidad.</td>
+                        <td>Cuaderno, lápiz</td>
                     </tr>
                 </tbody>
             </table>
@@ -498,7 +552,7 @@
         <section id="asistencia" class="card">
             <h2>Asistencia - 2ºA y 2ºB</h2>
             <p class="info" id="textoAsistencia">
-                Registro general de asistencia. En modo familia solo se muestra la asistencia del estudiante seleccionado.
+                Para docentes: puede marcar Presente, Atraso o Falta. Para familias: solo se muestra la asistencia del estudiante.
             </p>
 
             <table class="tabla" id="tablaAsistencia">
@@ -524,7 +578,7 @@
             </ul>
 
             <div class="galeria">
-                <!-- Imágenes de comunicados cuando las agreguen -->
+                <!-- Imágenes de comunicados cuando se agreguen -->
             </div>
         </section>
 
@@ -544,17 +598,17 @@
 
             <details>
                 <summary>¿Debo crear una cuenta para acceder?</summary>
-                <p>No. Solo necesita el código de acceso entregado por la unidad educativa.</p>
+                <p>No. Solo necesita el código de acceso.</p>
             </details>
 
             <details>
                 <summary>¿Cada cuánto se actualizan las notas?</summary>
-                <p>Las notas generales se actualizan por trimestre, con posibles avances parciales.</p>
+                <p>Las notas se actualizan por trimestre.</p>
             </details>
 
             <details>
                 <summary>¿Qué hago si veo un error en los datos?</summary>
-                <p>Comuníquese con los docentes por los canales oficiales de la unidad educativa.</p>
+                <p>Debe comunicarse con los docentes por los canales oficiales.</p>
             </details>
 
             <details>
@@ -572,15 +626,74 @@
 
 <!-- JAVASCRIPT -->
 <script>
-// Códigos de acceso (pueden cambiarlos)
+// Código docente (general)
 const CODIGO_DOCENTE = "DOCENTE2025";
-const CODIGO_FAMILIA = "FAMILIA2025";
 
 let rolActual = null;
 let alumnoActual = null;
 let paraleloActual = null;
 
-// Nómina real: 2ºA
+// Normalizar clave de familia
+function normalizarCodigoFamilia(str) {
+    return str
+        .toLowerCase()
+        .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+        .replace(/\s+/g, " ")
+        .trim();
+}
+
+// Mapa de códigos individuales de familia
+const codigosFamilia = {};
+function registrarCodigo(clave, alumno, paralelo) {
+    codigosFamilia[normalizarCodigoFamilia(clave)] = { alumno, paralelo };
+}
+
+// Registrar códigos por estudiante (primer apellido + nombre)
+registrarCodigo("Balderrama Marcos", "Balderrama Choque Marcos Dyland", "2ºA");
+registrarCodigo("Calle Zoe", "Calle  Pariguana Zoe Sofia", "2ºA");
+registrarCodigo("Cardenas Dimar", "Cardenas Chacon Dimar Santos", "2ºA");
+registrarCodigo("Ibanez Erik", "Ibañez Garnica Erik  Jhair", "2ºA");
+registrarCodigo("Lopez Jonathan", "Lopez Vega  Jonathan Joseph", "2ºA");
+registrarCodigo("Lovera Nataly", "Lovera Revollo Nataly", "2ºA");
+registrarCodigo("Male Nazaline", "Male Rodas  Nazaline", "2ºA");
+registrarCodigo("Mamani Cristan", "Mamani  Mendez Cristan", "2ºA");
+registrarCodigo("Nunez Luis", "Nuñez Lopez Luis Yair", "2ºA");
+registrarCodigo("Ontiveros Erick", "Ontiveros Rivera Erick Matias", "2ºA");
+registrarCodigo("Ortega Marian", "Ortega Rivera Marian Valentina", "2ºA");
+registrarCodigo("Ortiz Jhinaguissel", "Ortiz Encinas JhinaGuissel", "2ºA");
+registrarCodigo("Poma Daira", "Poma  Vargas  Daira  Jasmin", "2ºA");
+registrarCodigo("Ramos Sofia", "Ramos Miranda  Sofia", "2ºA");
+registrarCodigo("Requelme Brillit", "Requelme Arancibia BRILLIT", "2ºA");
+registrarCodigo("Rodas Ayned", "Rodas  Carballo Ayned  Masiel", "2ºA");
+registrarCodigo("Ruiz Aysel", "Ruiz Rodas  Aysel", "2ºA");
+registrarCodigo("Solis Marilet", "Solis  Salazar  Marilet", "2ºA");
+registrarCodigo("Yamandiry Liam", "Yamandiry Diaz  Liam  Abdiel", "2ºA");
+
+registrarCodigo("Aguilar Valentina", "AGUILAR VALENTINA MARGARITA", "2ºB");
+registrarCodigo("Avila Erick", "AVILA PLATA ERICK JHOEL", "2ºB");
+registrarCodigo("Ayllon Marines", "AYLLON HINOJOSA MARINES", "2ºB");
+registrarCodigo("Ballejos Alison", "BALLEJOS REVOLLO ALISON DANAE", "2ºB");
+registrarCodigo("Barja Zeineth", "BARJA LOPEZ ZEINETH", "2ºB");
+registrarCodigo("Beltran Stiven", "BELTRAN LOPEZ  STIVEN FRANCO", "2ºB");
+registrarCodigo("Carballo Ismael", "CARBALLO BERAMENDI ISMAEL", "2ºB");
+registrarCodigo("Chavarria Paul", "CHAVARRIA BARJA PAUL THIAGO", "2ºB");
+registrarCodigo("Copa Carlos", "COPA DIAZ CARLOS DANIEL", "2ºB");
+registrarCodigo("Fernandez Vayolet", "FERNANDEZ VELASCO VAYOLET YARELY", "2ºB");
+registrarCodigo("Flores Albaro", "FLORES QUIROGA ALBARO AARON", "2ºB");
+registrarCodigo("Flores Rene", "FLORES OVANDO RENE ALI ", "2ºB");
+registrarCodigo("Gonzales Emily", "GONZALES PANIAGUA EMILY CRISTAL", "2ºB");
+registrarCodigo("Lopez Hesel", "LOPEZ RODAS HESEL AINOHA", "2ºB");
+registrarCodigo("Miranda Eithan", "MIRANDA RUIZ EITHAN", "2ºB");
+registrarCodigo("Ortega Jhon", "ORTEGA MOLINA JHON MAICOL", "2ºB");
+registrarCodigo("Ortiz Fernanda", "ORTIZ CEREZO FERNANDA", "2ºB");
+registrarCodigo("Pardo Dannely", "PARDO PADILLA DANNELY SARAI", "2ºB");
+registrarCodigo("Quispe Jhosep", "QUISPE SANDOVAL JHOSEP", "2ºB");
+registrarCodigo("Ruiz Erick", "RUIZ ALARCON ERICK MIJAEL", "2ºB");
+registrarCodigo("Sardan Aysel", "SARDAN ZAMBRANA AYSEL DESIREE", "2ºB");
+registrarCodigo("Vega Angel", "VEGA SALAZAR ANGEL GAEL ", "2ºB");
+registrarCodigo("Zelaya Victoria", "ZELAYA SALAZAR VICTORIA MASSIEL", "2ºB");
+
+// Datos base de notas (pueden editar trimestre, área, nota, obs)
 const datosNotas2A = [
     { alumno: "Balderrama Choque Marcos Dyland", area: "General", trimestre: "-", nota: "", obs: "" },
     { alumno: "Calle  Pariguana Zoe Sofia", area: "General", trimestre: "-", nota: "", obs: "" },
@@ -603,7 +716,6 @@ const datosNotas2A = [
     { alumno: "Yamandiry Diaz  Liam  Abdiel", area: "General", trimestre: "-", nota: "", obs: "" }
 ];
 
-// Nómina real: 2ºB
 const datosNotas2B = [
     { alumno: "AGUILAR VALENTINA MARGARITA", area: "General", trimestre: "-", nota: "", obs: "" },
     { alumno: "AVILA PLATA ERICK JHOEL", area: "General", trimestre: "-", nota: "", obs: "" },
@@ -630,12 +742,12 @@ const datosNotas2B = [
     { alumno: "ZELAYA SALAZAR VICTORIA MASSIEL", area: "General", trimestre: "-", nota: "", obs: "" }
 ];
 
-// Asistencia (ejemplo; luego pueden ampliarlo)
+// Asistencia (ejemplo, editable)
 const datosAsistencia = [
-    { fecha: "25/11/2025", alumno: "Balderrama Choque Marcos Dyland", paralelo: "2ºA", estado: "Asistió", obs: "" },
-    { fecha: "25/11/2025", alumno: "Yamandiry Diaz  Liam  Abdiel", paralelo: "2ºA", estado: "Falta", obs: "Sin justificar" },
-    { fecha: "25/11/2025", alumno: "AGUILAR VALENTINA MARGARITA", paralelo: "2ºB", estado: "Asistió", obs: "" },
-    { fecha: "25/11/2025", alumno: "ZELAYA SALAZAR VICTORIA MASSIEL", paralelo: "2ºB", estado: "Falta", obs: "Justificada" }
+    { id: 1, fecha: "25/11/2025", alumno: "Balderrama Choque Marcos Dyland", paralelo: "2ºA", estado: "Presente", obs: "" },
+    { id: 2, fecha: "25/11/2025", alumno: "Yamandiry Diaz  Liam  Abdiel", paralelo: "2ºA", estado: "Falta", obs: "Sin justificar" },
+    { id: 3, fecha: "25/11/2025", alumno: "AGUILAR VALENTINA MARGARITA", paralelo: "2ºB", estado: "Presente", obs: "" },
+    { id: 4, fecha: "25/11/2025", alumno: "ZELAYA SALAZAR VICTORIA MASSIEL", paralelo: "2ºB", estado: "Atraso", obs: "Justificada" }
 ];
 
 // Utilidades
@@ -660,13 +772,21 @@ function llenarSelectAlumnos(selectId, datos) {
     });
 }
 
-function renderTablaNotas(tablaId, datos, filtroNombre = "") {
+function renderTablaNotas(tablaId, datos, filtros = {}) {
     const tbody = document.querySelector(`#${tablaId} tbody`);
     tbody.innerHTML = "";
 
-    const datosFiltrados = filtroNombre
-        ? datos.filter(d => d.alumno === filtroNombre)
-        : datos;
+    let datosFiltrados = datos;
+
+    if (filtros.alumno) {
+        datosFiltrados = datosFiltrados.filter(d => d.alumno === filtros.alumno);
+    }
+    if (filtros.trimestre) {
+        datosFiltrados = datosFiltrados.filter(d => d.trimestre === filtros.trimestre);
+    }
+    if (filtros.area) {
+        datosFiltrados = datosFiltrados.filter(d => d.area === filtros.area);
+    }
 
     if (datosFiltrados.length === 0) {
         const fila = document.createElement("tr");
@@ -709,7 +829,7 @@ function renderTablaAsistencia(filtroNombre = "") {
     const tbody = document.querySelector("#tablaAsistencia tbody");
     tbody.innerHTML = "";
 
-    const datosFiltrados = filtroNombre
+    let datosFiltrados = filtroNombre
         ? datosAsistencia.filter(d => d.alumno === filtroNombre)
         : datosAsistencia;
 
@@ -726,72 +846,112 @@ function renderTablaAsistencia(filtroNombre = "") {
     datosFiltrados.forEach(d => {
         const fila = document.createElement("tr");
 
-        ["fecha", "alumno", "paralelo", "estado", "obs"].forEach(campo => {
-            const c = document.createElement("td");
-            c.textContent = d[campo] || "";
-            fila.appendChild(c);
-        });
+        const cFecha = document.createElement("td");
+        cFecha.textContent = d.fecha;
+        fila.appendChild(cFecha);
+
+        const cAlumno = document.createElement("td");
+        cAlumno.textContent = d.alumno;
+        fila.appendChild(cAlumno);
+
+        const cParalelo = document.createElement("td");
+        cParalelo.textContent = d.paralelo;
+        fila.appendChild(cParalelo);
+
+        const cEstado = document.createElement("td");
+        if (rolActual === "docente") {
+            const sel = document.createElement("select");
+            ["Presente", "Atraso", "Falta"].forEach(op => {
+                const o = document.createElement("option");
+                o.value = op;
+                o.textContent = op;
+                sel.appendChild(o);
+            });
+            sel.value = d.estado;
+            sel.dataset.id = d.id;
+            sel.addEventListener("change", (e) => {
+                const id = parseInt(e.target.dataset.id, 10);
+                const idx = datosAsistencia.findIndex(reg => reg.id === id);
+                if (idx !== -1) {
+                    datosAsistencia[idx].estado = e.target.value;
+                }
+            });
+            cEstado.appendChild(sel);
+        } else {
+            cEstado.textContent = d.estado;
+        }
+        fila.appendChild(cEstado);
+
+        const cObs = document.createElement("td");
+        cObs.textContent = d.obs || "";
+        fila.appendChild(cObs);
 
         tbody.appendChild(fila);
     });
 }
 
-// Manejo de acceso
-document.getElementById("btnIngresar").addEventListener("click", () => {
-    const codigo = document.getElementById("codigoAcceso").value.trim();
-    const mensajeError = document.getElementById("mensajeError");
-    const rolSeleccionado = document.querySelector('input[name="rol"]:checked').value;
+function filtrarTareas(tablaId, modo) {
+    const hoy = new Date();
+    const filas = document.querySelectorAll(`#${tablaId} tbody tr`);
+    filas.forEach(row => {
+        if (modo === "todas") {
+            row.style.display = "";
+            return;
+        }
+        const fechaTexto = row.cells[0].textContent.trim(); // dd/mm/yyyy
+        const partes = fechaTexto.split("/");
+        if (partes.length !== 3) {
+            row.style.display = "";
+            return;
+        }
+        const dia = parseInt(partes[0], 10);
+        const mes = parseInt(partes[1], 10) - 1;
+        const anio = parseInt(partes[2], 10);
+        const fecha = new Date(anio, mes, dia);
+        const diffMs = hoy - fecha;
+        const dias = diffMs / (1000 * 60 * 60 * 24);
+        row.style.display = dias <= 7 ? "" : "none";
+    });
+}
 
-    let valido = false;
+// Actualizar tablas de notas según filtros
+function actualizarNotas2A() {
+    const trimestre = document.getElementById("filtroTrimestre2A").value;
+    const area = document.getElementById("filtroArea2A").value;
+    let alumnoFiltro = "";
 
-    if (rolSeleccionado === "docente" && codigo === CODIGO_DOCENTE) {
-        rolActual = "docente";
-        valido = true;
-    } else if (rolSeleccionado === "familia" && codigo === CODIGO_FAMILIA) {
-        rolActual = "familia";
-        valido = true;
+    if (rolActual === "familia") {
+        alumnoFiltro = (paraleloActual === "2ºA") ? alumnoActual : "";
+    } else {
+        alumnoFiltro = document.getElementById("filtroAlumno2A").value;
     }
 
-    if (!valido) {
-        mensajeError.textContent = "Código incorrecto. Verifique e intente nuevamente.";
-        return;
+    renderTablaNotas("tablaNotas2A", datosNotas2A, {
+        alumno: alumnoFiltro,
+        trimestre,
+        area
+    });
+}
+
+function actualizarNotas2B() {
+    const trimestre = document.getElementById("filtroTrimestre2B").value;
+    const area = document.getElementById("filtroArea2B").value;
+    let alumnoFiltro = "";
+
+    if (rolActual === "familia") {
+        alumnoFiltro = (paraleloActual === "2ºB") ? alumnoActual : "";
+    } else {
+        alumnoFiltro = document.getElementById("filtroAlumno2B").value;
     }
 
-    mensajeError.textContent = "";
+    renderTablaNotas("tablaNotas2B", datosNotas2B, {
+        alumno: alumnoFiltro,
+        trimestre,
+        area
+    });
+}
 
-    if (rolActual === "docente") {
-        document.getElementById("pantalla-acceso").style.display = "none";
-        document.getElementById("app").style.display = "block";
-        configurarVistaDocente();
-    } else if (rolActual === "familia") {
-        document.getElementById("pantalla-acceso").style.display = "none";
-        document.getElementById("pantalla-seleccionar-estudiante").style.display = "flex";
-    }
-});
-
-// Selección de estudiante para familias
-document.getElementById("btnContinuarFamilia").addEventListener("click", () => {
-    const select = document.getElementById("selectorEstudianteFamilia");
-    const mensajeError = document.getElementById("mensajeErrorFamilia");
-    const seleccionado = select.value;
-
-    if (!seleccionado) {
-        mensajeError.textContent = "Seleccione un estudiante para continuar.";
-        return;
-    }
-
-    mensajeError.textContent = "";
-    alumnoActual = seleccionado;
-
-    const estaEnA = datosNotas2A.some(d => d.alumno === alumnoActual);
-    paraleloActual = estaEnA ? "2ºA" : "2ºB";
-
-    document.getElementById("pantalla-seleccionar-estudiante").style.display = "none";
-    document.getElementById("app").style.display = "block";
-    configurarVistaFamilia();
-});
-
-// Configurar vista para DOCENTES (ven todo)
+// Configurar vista para DOCENTE
 function configurarVistaDocente() {
     const textoRol = document.getElementById("textoRol");
     const resumen = document.getElementById("resumenEstudiante");
@@ -801,10 +961,6 @@ function configurarVistaDocente() {
 
     document.getElementById("filtros2A").style.display = "flex";
     document.getElementById("filtros2B").style.display = "flex";
-    document.getElementById("textoNotas2A").textContent =
-        "Seleccione un estudiante para ver sus notas, o \"Todos\" para ver la lista completa.";
-    document.getElementById("textoNotas2B").textContent =
-        "Seleccione un estudiante para ver sus notas, o \"Todos\" para ver la lista completa.";
 
     document.getElementById("a-notas").style.display = "block";
     document.getElementById("b-notas").style.display = "block";
@@ -816,28 +972,25 @@ function configurarVistaDocente() {
     document.getElementById("linkTareas2A").style.display = "inline-block";
     document.getElementById("linkTareas2B").style.display = "inline-block";
 
-    renderTablaNotas("tablaNotas2A", datosNotas2A);
-    renderTablaNotas("tablaNotas2B", datosNotas2B);
+    actualizarNotas2A();
+    actualizarNotas2B();
     renderTablaAsistencia("");
 }
 
-// Configurar vista para FAMILIA (solo un estudiante)
+// Configurar vista para FAMILIA
 function configurarVistaFamilia() {
     const textoRol = document.getElementById("textoRol");
     const resumen = document.getElementById("resumenEstudiante");
 
-    textoRol.textContent = `Acceso: Madre, padre o tutor`;
+    textoRol.textContent = "Acceso: Madre, padre o tutor";
     resumen.style.display = "block";
     resumen.textContent = `Visualizando información de: ${alumnoActual} (${paraleloActual})`;
 
-    // Ocultar filtros de selección en notas
-    document.getElementById("filtros2A").style.display = "none";
-    document.getElementById("filtros2B").style.display = "none";
-
-    document.getElementById("textoNotas2A").textContent =
-        "Notas del estudiante seleccionado en el paralelo 2ºA.";
-    document.getElementById("textoNotas2B").textContent =
-        "Notas del estudiante seleccionado en el paralelo 2ºB.";
+    // Ocultamos selector de alumno, pero mantenemos trimestre/área
+    const selectAlumno2A = document.getElementById("filtroAlumno2A");
+    const selectAlumno2B = document.getElementById("filtroAlumno2B");
+    if (selectAlumno2A) selectAlumno2A.style.display = "none";
+    if (selectAlumno2B) selectAlumno2B.style.display = "none";
 
     if (paraleloActual === "2ºA") {
         document.getElementById("a-notas").style.display = "block";
@@ -850,8 +1003,8 @@ function configurarVistaFamilia() {
         document.getElementById("linkTareas2A").style.display = "inline-block";
         document.getElementById("linkTareas2B").style.display = "none";
 
-        renderTablaNotas("tablaNotas2A", datosNotas2A, alumnoActual);
-        renderTablaNotas("tablaNotas2B", datosNotas2B, ""); // Vacía, sección oculta
+        actualizarNotas2A();
+        renderTablaNotas("tablaNotas2B", datosNotas2B, { alumno: "" });
     } else {
         document.getElementById("a-notas").style.display = "none";
         document.getElementById("b-notas").style.display = "block";
@@ -863,49 +1016,74 @@ function configurarVistaFamilia() {
         document.getElementById("linkTareas2A").style.display = "none";
         document.getElementById("linkTareas2B").style.display = "inline-block";
 
-        renderTablaNotas("tablaNotas2A", datosNotas2A, "");
-        renderTablaNotas("tablaNotas2B", datosNotas2B, alumnoActual);
+        actualizarNotas2B();
+        renderTablaNotas("tablaNotas2A", datosNotas2A, { alumno: "" });
     }
 
     renderTablaAsistencia(alumnoActual);
 }
 
-// Inicialización al cargar
+// Manejo de acceso
+document.getElementById("btnIngresar").addEventListener("click", () => {
+    const codigo = document.getElementById("codigoAcceso").value.trim();
+    const mensajeError = document.getElementById("mensajeError");
+    const rolSeleccionado = document.querySelector('input[name="rol"]:checked').value;
+
+    if (rolSeleccionado === "docente") {
+        if (codigo !== CODIGO_DOCENTE) {
+            mensajeError.textContent = "Código incorrecto. Verifique e intente nuevamente.";
+            return;
+        }
+        rolActual = "docente";
+        mensajeError.textContent = "";
+        document.getElementById("pantalla-acceso").style.display = "none";
+        document.getElementById("app").style.display = "block";
+        configurarVistaDocente();
+    } else {
+        const codigoNorm = normalizarCodigoFamilia(codigo);
+        const info = codigosFamilia[codigoNorm];
+        if (!info) {
+            mensajeError.textContent = "Código de estudiante no válido. Revise el primer apellido y nombre.";
+            return;
+        }
+        rolActual = "familia";
+        alumnoActual = info.alumno;
+        paraleloActual = info.paralelo;
+        mensajeError.textContent = "";
+        document.getElementById("pantalla-acceso").style.display = "none";
+        document.getElementById("app").style.display = "block";
+        configurarVistaFamilia();
+    }
+});
+
+// Inicialización
 document.addEventListener("DOMContentLoaded", () => {
-    // Llenar selects de notas para docentes
+    // Selectores de alumnos para notas (modo docente)
     llenarSelectAlumnos("filtroAlumno2A", datosNotas2A);
     llenarSelectAlumnos("filtroAlumno2B", datosNotas2B);
 
-    // Listado combinado para el selector de familias
-    const todosLosAlumnos = obtenerListaAlumnos(datosNotas2A)
-        .concat(obtenerListaAlumnos(datosNotas2B));
-    const unico = Array.from(new Set(todosLosAlumnos)).sort();
-    const selectorFamilia = document.getElementById("selectorEstudianteFamilia");
-    const optVacio = document.createElement("option");
-    optVacio.value = "";
-    optVacio.textContent = "Seleccionar...";
-    selectorFamilia.appendChild(optVacio);
-    unico.forEach(nombre => {
-        const opt = document.createElement("option");
-        opt.value = nombre;
-        opt.textContent = nombre;
-        selectorFamilia.appendChild(opt);
+    // Listeners filtros notas 2ºA
+    document.getElementById("filtroAlumno2A").addEventListener("change", actualizarNotas2A);
+    document.getElementById("filtroTrimestre2A").addEventListener("change", actualizarNotas2A);
+    document.getElementById("filtroArea2A").addEventListener("change", actualizarNotas2A);
+
+    // Listeners filtros notas 2ºB
+    document.getElementById("filtroAlumno2B").addEventListener("change", actualizarNotas2B);
+    document.getElementById("filtroTrimestre2B").addEventListener("change", actualizarNotas2B);
+    document.getElementById("filtroArea2B").addEventListener("change", actualizarNotas2B);
+
+    // Botones tareas recientes / todas
+    document.querySelectorAll(".btn-tareas").forEach(btn => {
+        btn.addEventListener("click", () => {
+            const tablaId = btn.dataset.target;
+            const modo = btn.dataset.modo;
+            filtrarTareas(tablaId, modo);
+        });
     });
 
-    // Eventos de filtros para docentes
-    document.getElementById("filtroAlumno2A").addEventListener("change", (e) => {
-        const valor = e.target.value;
-        renderTablaNotas("tablaNotas2A", datosNotas2A, valor);
-    });
-
-    document.getElementById("filtroAlumno2B").addEventListener("change", (e) => {
-        const valor = e.target.value;
-        renderTablaNotas("tablaNotas2B", datosNotas2B, valor);
-    });
-
-    // Render inicial (no visible hasta que entren)
-    renderTablaNotas("tablaNotas2A", datosNotas2A);
-    renderTablaNotas("tablaNotas2B", datosNotas2B);
+    // Render inicial (no visible hasta que se ingrese)
+    renderTablaNotas("tablaNotas2A", datosNotas2A, {});
+    renderTablaNotas("tablaNotas2B", datosNotas2B, {});
     renderTablaAsistencia("");
 });
 </script>
