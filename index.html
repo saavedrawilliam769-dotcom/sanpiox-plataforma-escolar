@@ -389,7 +389,7 @@
             <p>Desde aquí podrán revisar:</p>
             <ul>
                 <li>Notas por área y trimestre (Ser, Saber, Hacer, Decidir, Autoevaluación y promedio final).</li>
-                <li>Tareas vigentes y si fueron realizadas o no.</li>
+                <li>Tareas asignadas y si fueron realizadas o no.</li>
                 <li>Asistencia diaria de lunes a viernes.</li>
                 <li>Comunicados y avisos importantes.</li>
                 <li>Material de apoyo para el estudio en casa.</li>
@@ -413,6 +413,7 @@
                     Las notas se organizan por trimestre y por áreas, considerando:
                     Ser (5 pts), Saber (45), Hacer (40), Decidir (5) y Autoevaluación (5).
                     La suma de estas cinco notas forma el <b>promedio final</b> (sobre 100 pts).
+                    La nota mínima de aprobación es <b>51 puntos</b>.
                 </li>
                 <li>
                     <b>Uso responsable</b><br>
@@ -528,7 +529,11 @@
         <!-- TAREAS 2ºA -->
         <section id="a-tareas" class="card">
             <h2>Tareas - 2ºA</h2>
-            <p class="info">Tareas generales del paralelo 2ºA. Puede marcar si la tarea fue realizada o no.</p>
+            <p class="info">
+                Tareas del paralelo 2ºA.  
+                Docentes: marcan si cada estudiante realizó o no la tarea.  
+                Familias: solo visualizan el estado de las tareas de su hija o hijo.
+            </p>
 
             <div class="filtros">
                 <button type="button" class="btn-tareas" data-target="tablaTareas2A" data-modo="recientes">
@@ -542,39 +547,26 @@
             <table class="tabla" id="tablaTareas2A">
                 <thead>
                     <tr>
+                        <th>Tarea</th>
                         <th>Fecha asignación</th>
                         <th>Fecha entrega</th>
                         <th>Área</th>
-                        <th>Descripción</th>
-                        <th>Materiales</th>
+                        <th>Estudiante</th>
                         <th>Realizada</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>20/11/2025</td>
-                        <td>22/11/2025</td>
-                        <td>Matemática</td>
-                        <td>Resolver 5 ejercicios de suma y resta.</td>
-                        <td>Cuaderno, lápiz, borrador</td>
-                        <td style="text-align:center;"><input type="checkbox"></td>
-                    </tr>
-                    <tr>
-                        <td>10/11/2025</td>
-                        <td>13/11/2025</td>
-                        <td>Lenguaje</td>
-                        <td>Redactar una pequeña descripción de su familia.</td>
-                        <td>Cuaderno, lápiz</td>
-                        <td style="text-align:center;"><input type="checkbox"></td>
-                    </tr>
-                </tbody>
+                <tbody></tbody>
             </table>
         </section>
 
         <!-- TAREAS 2ºB -->
         <section id="b-tareas" class="card">
             <h2>Tareas - 2ºB</h2>
-            <p class="info">Tareas generales del paralelo 2ºB. Puede marcar si la tarea fue realizada o no.</p>
+            <p class="info">
+                Tareas del paralelo 2ºB.  
+                Docentes: marcan si cada estudiante realizó o no la tarea.  
+                Familias: solo visualizan el estado de las tareas de su hija o hijo.
+            </p>
 
             <div class="filtros">
                 <button type="button" class="btn-tareas" data-target="tablaTareas2B" data-modo="recientes">
@@ -588,32 +580,15 @@
             <table class="tabla" id="tablaTareas2B">
                 <thead>
                     <tr>
+                        <th>Tarea</th>
                         <th>Fecha asignación</th>
                         <th>Fecha entrega</th>
                         <th>Área</th>
-                        <th>Descripción</th>
-                        <th>Materiales</th>
+                        <th>Estudiante</th>
                         <th>Realizada</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>21/11/2025</td>
-                        <td>24/11/2025</td>
-                        <td>Ciencias Naturales</td>
-                        <td>Dibujar una planta y señalar sus partes.</td>
-                        <td>Hoja, colores</td>
-                        <td style="text-align:center;"><input type="checkbox"></td>
-                    </tr>
-                    <tr>
-                        <td>11/11/2025</td>
-                        <td>14/11/2025</td>
-                        <td>Ciencias Sociales</td>
-                        <td>Investigar una costumbre de su comunidad.</td>
-                        <td>Cuaderno, lápiz</td>
-                        <td style="text-align:center;"><input type="checkbox"></td>
-                    </tr>
-                </tbody>
+                <tbody></tbody>
             </table>
         </section>
 
@@ -621,7 +596,7 @@
         <section id="asistencia" class="card">
             <h2>Asistencia - 2ºA y 2ºB</h2>
             <p class="info" id="textoAsistencia">
-                Registro centralizado de asistencia de lunes a viernes para todos los estudiantes.  
+                Registro centralizado de asistencia de Lunes a Viernes para toda la nómina de estudiantes.  
                 Para docentes: puede marcar Presente, Atraso o Falta.  
                 Para familias: solo se muestra la asistencia del estudiante.
             </p>
@@ -646,8 +621,7 @@
             <p class="info">
                 Los cambios que realice aquí se aplican en la página mientras esté abierta.
                 Al recargar, se pierden (porque la plataforma es estática).  
-                Para hacerlos permanentes, luego se deben actualizar los datos en el archivo de la página
-                o usar el botón de descarga para guardar un respaldo en JSON.
+                Para hacerlos permanentes, descargue el archivo JSON y luego actualice los datos en el código.
             </p>
 
             <div class="panel-grid">
@@ -696,7 +670,7 @@
                     <button type="button" id="btnGuardarNota">Guardar nota</button>
                     <div class="panel-ayuda">
                         El promedio final se calcula automáticamente como suma de las cinco notas (máximo 100).
-                        La observación se genera según el promedio final, con mensajes positivos de refuerzo.
+                        La observación se genera con un mensaje positivo de refuerzo, según el promedio final.
                     </div>
                 </div>
 
@@ -704,8 +678,7 @@
                 <div class="panel-card">
                     <h3>Respaldo de datos (JSON)</h3>
                     <p class="panel-ayuda">
-                        Use este botón para descargar un archivo con todas las notas (2ºA y 2ºB)
-                        y el registro de asistencia actual.
+                        Use este botón para descargar todas las notas, asistencias y estados de tareas.
                     </p>
                     <button type="button" id="btnDescargarJSON">Descargar datos (JSON)</button>
                     <p class="panel-ayuda">
@@ -899,6 +872,49 @@ const areasCalificacion = [
 
 const trimestresCalificacion = ["1º", "2º"];
 
+// TAREAS: definición de tareas por paralelo
+const tareas2A = [
+    {
+        id: 1,
+        titulo: "Suma y resta",
+        fechaAsignacion: "20/11/2025",
+        fechaEntrega: "22/11/2025",
+        area: "Matemática",
+        descripcion: "Resolver 5 ejercicios de suma y resta."
+    },
+    {
+        id: 2,
+        titulo: "Mi familia",
+        fechaAsignacion: "10/11/2025",
+        fechaEntrega: "13/11/2025",
+        area: "Lenguaje",
+        descripcion: "Redactar una pequeña descripción de su familia."
+    }
+];
+
+const tareas2B = [
+    {
+        id: 1,
+        titulo: "Partes de la planta",
+        fechaAsignacion: "21/11/2025",
+        fechaEntrega: "24/11/2025",
+        area: "Ciencias Naturales",
+        descripcion: "Dibujar una planta y señalar sus partes."
+    },
+    {
+        id: 2,
+        titulo: "Costumbre de la comunidad",
+        fechaAsignacion: "11/11/2025",
+        fechaEntrega: "14/11/2025",
+        area: "Ciencias Sociales",
+        descripcion: "Investigar una costumbre de su comunidad."
+    }
+];
+
+// Estado de tareas por estudiante
+let estadoTareas2A = [];
+let estadoTareas2B = [];
+
 // Arreglos de notas
 const datosNotas2A = [];
 const datosNotas2B = [];
@@ -920,7 +936,7 @@ function randInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-// Generar datos ficticios para todos los estudiantes (1º y 2º trimestre, todas las áreas)
+// Generar datos ficticios de notas para todos los estudiantes (1º y 2º trimestre, todas las áreas)
 function generarNotasIniciales() {
     alumnos2A.forEach(alumno => {
         trimestresCalificacion.forEach(trim => {
@@ -977,8 +993,31 @@ function generarNotasIniciales() {
     });
 }
 
-// Generar datos ficticios al cargar el script
-generarNotasIniciales();
+// Generar datos ficticios de tareas: estado por estudiante (por defecto: no realizada)
+function generarEstadoInicialTareas() {
+    estadoTareas2A = [];
+    estadoTareas2B = [];
+
+    alumnos2A.forEach(alumno => {
+        tareas2A.forEach(t => {
+            estadoTareas2A.push({
+                tareaId: t.id,
+                alumno,
+                realizada: false
+            });
+        });
+    });
+
+    alumnos2B.forEach(alumno => {
+        tareas2B.forEach(t => {
+            estadoTareas2B.push({
+                tareaId: t.id,
+                alumno,
+                realizada: false
+            });
+        });
+    });
+}
 
 // Asistencia: días de lunes a viernes
 const diasSemana = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"];
@@ -1015,6 +1054,10 @@ function inicializarAsistenciaSemana() {
         });
     });
 }
+
+// Generar datos iniciales
+generarNotasIniciales();
+generarEstadoInicialTareas();
 
 // Utilidades
 function obtenerListaAlumnos(datos) {
@@ -1176,28 +1219,115 @@ function renderTablaAsistencia(filtroNombre = "") {
     });
 }
 
-function filtrarTareas(tablaId, modo) {
+// Parsear fecha dd/mm/yyyy a objeto Date
+function parseFecha(fechaTexto) {
+    const partes = fechaTexto.split("/");
+    if (partes.length !== 3) return null;
+    const dia = parseInt(partes[0], 10);
+    const mes = parseInt(partes[1], 10) - 1;
+    const anio = parseInt(partes[2], 10);
+    return new Date(anio, mes, dia);
+}
+
+// Renderizar tabla de tareas por paralelo y modo (recientes/todas)
+function renderTablaTareas(paralelo, modo = "todas") {
+    const esA = paralelo === "2ºA";
+    const tareas = esA ? tareas2A : tareas2B;
+    const estados = esA ? estadoTareas2A : estadoTareas2B;
+    const alumnos = esA ? alumnos2A : alumnos2B;
+    const tablaId = esA ? "tablaTareas2A" : "tablaTareas2B";
+
+    const tbody = document.querySelector(`#${tablaId} tbody`);
+    tbody.innerHTML = "";
+
     const hoy = new Date();
-    const filas = document.querySelectorAll(`#${tablaId} tbody tr`);
-    filas.forEach(row => {
-        if (modo === "todas") {
-            row.style.display = "";
-            return;
+    let hayRegistros = false;
+
+    tareas.forEach(tarea => {
+        const fechaAsig = parseFecha(tarea.fechaAsignacion);
+        if (modo === "recientes" && fechaAsig) {
+            const diffMs = hoy - fechaAsig;
+            const dias = diffMs / (1000 * 60 * 60 * 24);
+            if (dias > 7) {
+                return; // no mostrar
+            }
         }
-        const fechaTexto = row.cells[0].textContent.trim(); // dd/mm/yyyy
-        const partes = fechaTexto.split("/");
-        if (partes.length !== 3) {
-            row.style.display = "";
-            return;
-        }
-        const dia = parseInt(partes[0], 10);
-        const mes = parseInt(partes[1], 10) - 1;
-        const anio = parseInt(partes[2], 10);
-        const fecha = new Date(anio, mes, dia);
-        const diffMs = hoy - fecha;
-        const dias = diffMs / (1000 * 60 * 60 * 24);
-        row.style.display = dias <= 7 ? "" : "none";
+
+        alumnos.forEach(alumno => {
+            // Si es familia, solo se muestra el hijo/hija correspondiente
+            if (rolActual === "familia" && alumno !== alumnoActual) return;
+
+            const reg = estados.find(r => r.tareaId === tarea.id && r.alumno === alumno);
+            const realizada = reg ? reg.realizada : false;
+
+            const fila = document.createElement("tr");
+
+            const cTarea = document.createElement("td");
+            cTarea.textContent = tarea.titulo;
+            fila.appendChild(cTarea);
+
+            const cFA = document.createElement("td");
+            cFA.textContent = tarea.fechaAsignacion;
+            fila.appendChild(cFA);
+
+            const cFE = document.createElement("td");
+            cFE.textContent = tarea.fechaEntrega;
+            fila.appendChild(cFE);
+
+            const cArea = document.createElement("td");
+            cArea.textContent = tarea.area;
+            fila.appendChild(cArea);
+
+            const cAlumno = document.createElement("td");
+            cAlumno.textContent = alumno;
+            fila.appendChild(cAlumno);
+
+            const cRealizada = document.createElement("td");
+            if (rolActual === "docente") {
+                const chk = document.createElement("input");
+                chk.type = "checkbox";
+                chk.checked = realizada;
+                chk.dataset.paralelo = paralelo;
+                chk.dataset.tareaId = tarea.id;
+                chk.dataset.alumno = alumno;
+                chk.addEventListener("change", (e) => {
+                    const p = e.target.dataset.paralelo;
+                    const idT = parseInt(e.target.dataset.tareaId, 10);
+                    const alu = e.target.dataset.alumno;
+                    const arr = p === "2ºA" ? estadoTareas2A : estadoTareas2B;
+                    const regEncontrado = arr.find(r => r.tareaId === idT && r.alumno === alu);
+                    if (regEncontrado) {
+                        regEncontrado.realizada = e.target.checked;
+                    }
+                });
+                cRealizada.appendChild(chk);
+            } else {
+                cRealizada.textContent = realizada ? "Sí" : "No";
+            }
+            fila.appendChild(cRealizada);
+
+            tbody.appendChild(fila);
+            hayRegistros = true;
+        });
     });
+
+    if (!hayRegistros) {
+        const fila = document.createElement("tr");
+        const celda = document.createElement("td");
+        celda.colSpan = 6;
+        celda.textContent = "No hay registros para mostrar.";
+        fila.appendChild(celda);
+        tbody.appendChild(fila);
+    }
+}
+
+// Esta función se usa desde los botones de tareas
+function filtrarTareas(tablaId, modo) {
+    if (tablaId === "tablaTareas2A") {
+        renderTablaTareas("2ºA", modo);
+    } else {
+        renderTablaTareas("2ºB", modo);
+    }
 }
 
 // Actualizar tablas de notas según filtros
@@ -1264,6 +1394,9 @@ function configurarVistaDocente() {
     actualizarNotas2B();
     renderTablaAsistencia("");
 
+    renderTablaTareas("2ºA", "todas");
+    renderTablaTareas("2ºB", "todas");
+
     // Inicializar lista de alumnos en panel docente
     actualizarListaPanelAlumnos();
 }
@@ -1299,6 +1432,8 @@ function configurarVistaFamilia() {
 
         actualizarNotas2A();
         renderTablaNotas("tablaNotas2B", datosNotas2B, { alumno: "" });
+
+        renderTablaTareas("2ºA", "todas");
     } else {
         document.getElementById("a-notas").style.display = "none";
         document.getElementById("b-notas").style.display = "block";
@@ -1312,6 +1447,8 @@ function configurarVistaFamilia() {
 
         actualizarNotas2B();
         renderTablaNotas("tablaNotas2A", datosNotas2A, { alumno: "" });
+
+        renderTablaTareas("2ºB", "todas");
     }
 
     renderTablaAsistencia(alumnoActual);
@@ -1443,12 +1580,16 @@ function guardarNotaDesdePanel() {
     alert(`Nota registrada/actualizada. Promedio final: ${notaFinal}`);
 }
 
-// Panel docente: descargar JSON con notas y asistencia
+// Panel docente: descargar JSON con notas, asistencia y tareas
 function descargarJSONDatos() {
     const datos = {
         notas2A: datosNotas2A,
         notas2B: datosNotas2B,
-        asistencia: datosAsistencia
+        asistencia: datosAsistencia,
+        tareas2A: tareas2A,
+        tareas2B: tareas2B,
+        estadoTareas2A: estadoTareas2A,
+        estadoTareas2B: estadoTareas2B
     };
 
     const contenido = JSON.stringify(datos, null, 2);
@@ -1508,6 +1649,9 @@ document.addEventListener("DOMContentLoaded", () => {
     renderTablaNotas("tablaNotas2A", datosNotas2A, {});
     renderTablaNotas("tablaNotas2B", datosNotas2B, {});
     renderTablaAsistencia("");
+
+    renderTablaTareas("2ºA", "todas");
+    renderTablaTareas("2ºB", "todas");
 
     // Inicializar lista de alumnos del panel (por defecto 2ºA)
     actualizarListaPanelAlumnos();
