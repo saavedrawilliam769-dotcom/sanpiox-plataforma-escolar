@@ -21,7 +21,8 @@
         }
 
         /* Pantalla de acceso */
-        #pantalla-acceso {
+        #pantalla-acceso,
+        #pantalla-seleccionar-estudiante {
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -40,6 +41,12 @@
             margin-top: 0;
             color: var(--color-primario);
             font-size: 1.4rem;
+            text-align: center;
+        }
+        .acceso-card h2 {
+            margin-top: 0;
+            color: var(--color-primario);
+            font-size: 1.2rem;
             text-align: center;
         }
         .acceso-card p {
@@ -65,7 +72,8 @@
         .acceso-opciones label {
             font-weight: normal;
         }
-        .acceso-input {
+        .acceso-input,
+        .acceso-select {
             width: 100%;
             padding: 8px;
             font-size: 0.9rem;
@@ -91,6 +99,7 @@
             color: #b71c1c;
             font-size: 0.8rem;
             min-height: 16px;
+            text-align: center;
         }
 
         header {
@@ -221,6 +230,14 @@
             color: #eee;
             margin-top: 4px;
         }
+        .resumen-estudiante {
+            font-size: 0.85rem;
+            background: #e3f2fd;
+            border-left: 4px solid var(--color-secundario);
+            padding: 8px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
         footer {
             background: var(--color-primario);
             color: var(--color-blanco);
@@ -249,7 +266,7 @@
 <section id="pantalla-acceso">
     <div class="acceso-card">
         <h1>San Pio X Plataforma Escolar</h1>
-        <p>Ingrese para acceder a la información del 2º Año, paralelos A y B.</p>
+        <p>Acceso a la información del 2º Año, paralelos A y B.</p>
 
         <div class="acceso-group">
             <label>Tipo de usuario</label>
@@ -261,7 +278,7 @@
 
         <div class="acceso-group">
             <label for="codigoAcceso">Código de acceso</label>
-            <input type="password" id="codigoAcceso" class="acceso-input" placeholder="Escriba el código proporcionado">
+            <input type="password" id="codigoAcceso" class="acceso-input" placeholder="Ingrese el código">
         </div>
 
         <button class="acceso-boton" id="btnIngresar">Ingresar</button>
@@ -269,7 +286,25 @@
     </div>
 </section>
 
-<!-- APLICACIÓN PRINCIPAL (OCULTA HASTA INGRESAR) -->
+<!-- PANTALLA PARA SELECCIONAR ESTUDIANTE (PADRES) -->
+<section id="pantalla-seleccionar-estudiante" style="display:none;">
+    <div class="acceso-card">
+        <h2>Seleccione al estudiante</h2>
+        <p>Elija el nombre de su hija o hijo para ver únicamente su información.</p>
+
+        <div class="acceso-group">
+            <label for="selectorEstudianteFamilia">Estudiante</label>
+            <select id="selectorEstudianteFamilia" class="acceso-select">
+                <!-- Se llena con JS -->
+            </select>
+        </div>
+
+        <button class="acceso-boton" id="btnContinuarFamilia">Continuar</button>
+        <div class="acceso-error" id="mensajeErrorFamilia"></div>
+    </div>
+</section>
+
+<!-- APLICACIÓN PRINCIPAL -->
 <div id="app" style="display:none;">
     <header>
         <h1>San Pio X Plataforma Escolar</h1>
@@ -280,10 +315,10 @@
     <nav>
         <a href="#bienvenida">Inicio</a>
         <a href="#guia">Guía para Padres</a>
-        <a href="#a-notas">Notas 2ºA</a>
-        <a href="#b-notas">Notas 2ºB</a>
-        <a href="#a-tareas">Tareas 2ºA</a>
-        <a href="#b-tareas">Tareas 2ºB</a>
+        <a href="#a-notas" id="linkNotas2A">Notas 2ºA</a>
+        <a href="#b-notas" id="linkNotas2B">Notas 2ºB</a>
+        <a href="#a-tareas" id="linkTareas2A">Tareas 2ºA</a>
+        <a href="#b-tareas" id="linkTareas2B">Tareas 2ºB</a>
         <a href="#asistencia">Asistencia</a>
         <a href="#comunicados">Comunicados</a>
         <a href="#material">Material de apoyo</a>
@@ -291,6 +326,8 @@
     </nav>
 
     <div class="container">
+
+        <div id="resumenEstudiante" class="resumen-estudiante" style="display:none;"></div>
 
         <!-- PORTADA -->
         <section class="card" id="portada">
@@ -310,17 +347,16 @@
                 Estimadas madres y padres de familia:
             </p>
             <p>
-                Les damos la bienvenida a la <b>San Pio X Plataforma Escolar</b>, creada para fortalecer la comunicación
-                entre la unidad educativa y las familias, y para facilitar el seguimiento del proceso de aprendizaje
+                Bienvenidos a la <b>San Pio X Plataforma Escolar</b>, un espacio para acompañar el proceso de aprendizaje
                 de sus hijas e hijos de <b>2º Año, paralelos A y B</b>.
             </p>
-            <p>Desde este espacio podrán revisar:</p>
+            <p>Desde aquí podrán revisar:</p>
             <ul>
                 <li>Notas por área y trimestre.</li>
                 <li>Tareas vigentes y fechas de entrega.</li>
-                <li>Asistencia, atrasos y observaciones generales.</li>
+                <li>Asistencia y observaciones generales.</li>
                 <li>Comunicados y avisos importantes.</li>
-                <li>Material de apoyo para acompañar el estudio en casa.</li>
+                <li>Material de apoyo para el estudio en casa.</li>
             </ul>
         </section>
 
@@ -330,13 +366,12 @@
             <ol>
                 <li>
                     <b>Navegación básica</b><br>
-                    Use el menú superior para ir directamente a:
-                    Notas, Tareas, Asistencia, Comunicados y Material de apoyo.
+                    Use el menú superior para ir a Notas, Tareas, Asistencia, Comunicados y Material de apoyo.
                 </li>
                 <li>
                     <b>Paralelo correcto</b><br>
-                    Revise siempre la sección de <span class="badge">2ºA</span> o <span class="badge">2ºB</span>
-                    según corresponda.
+                    La plataforma diferencia entre <span class="badge">2ºA</span> y <span class="badge">2ºB</span>
+                    según el curso de su hija o hijo.
                 </li>
                 <li>
                     <b>Actualización</b><br>
@@ -349,18 +384,18 @@
             </ol>
 
             <div class="alerta">
-                No se requiere usuario ni contraseña en la plataforma, solo el código de acceso proporcionado por la unidad educativa.
+                El acceso se realiza mediante códigos entregados por la unidad educativa.
             </div>
         </section>
 
         <!-- NOTAS 2ºA -->
         <section id="a-notas" class="card">
             <h2>Notas - 2ºA</h2>
-            <p class="info">
-                Seleccione un estudiante para ver solo sus notas, o deje "Todos los estudiantes" para ver el listado completo.
+            <p class="info" id="textoNotas2A">
+                Seleccione un estudiante para ver sus notas, o "Todos" para ver la lista completa.
             </p>
 
-            <div class="filtros">
+            <div class="filtros" id="filtros2A">
                 <label for="filtroAlumno2A">Estudiante:</label>
                 <select id="filtroAlumno2A"></select>
             </div>
@@ -382,11 +417,11 @@
         <!-- NOTAS 2ºB -->
         <section id="b-notas" class="card">
             <h2>Notas - 2ºB</h2>
-            <p class="info">
-                Seleccione un estudiante para ver solo sus notas, o deje "Todos los estudiantes" para ver el listado completo.
+            <p class="info" id="textoNotas2B">
+                Seleccione un estudiante para ver sus notas, o "Todos" para ver la lista completa.
             </p>
 
-            <div class="filtros">
+            <div class="filtros" id="filtros2B">
                 <label for="filtroAlumno2B">Estudiante:</label>
                 <select id="filtroAlumno2B"></select>
             </div>
@@ -408,9 +443,9 @@
         <!-- TAREAS 2ºA -->
         <section id="a-tareas" class="card">
             <h2>Tareas - 2ºA</h2>
-            <p class="info">Listado general de tareas vigentes del paralelo 2ºA.</p>
+            <p class="info">Tareas generales del paralelo 2ºA.</p>
 
-            <table class="tabla" id="tablaTareas2A">
+            <table class="tabla">
                 <thead>
                     <tr>
                         <th>Fecha asignación</th>
@@ -435,9 +470,9 @@
         <!-- TAREAS 2ºB -->
         <section id="b-tareas" class="card">
             <h2>Tareas - 2ºB</h2>
-            <p class="info">Listado general de tareas vigentes del paralelo 2ºB.</p>
+            <p class="info">Tareas generales del paralelo 2ºB.</p>
 
-            <table class="tabla" id="tablaTareas2B">
+            <table class="tabla">
                 <thead>
                     <tr>
                         <th>Fecha asignación</th>
@@ -462,9 +497,11 @@
         <!-- ASISTENCIA -->
         <section id="asistencia" class="card">
             <h2>Asistencia - 2ºA y 2ºB</h2>
-            <p class="info">Ejemplo de estructura de registro de asistencia.</p>
+            <p class="info" id="textoAsistencia">
+                Registro general de asistencia. En modo familia solo se muestra la asistencia del estudiante seleccionado.
+            </p>
 
-            <table class="tabla">
+            <table class="tabla" id="tablaAsistencia">
                 <thead>
                     <tr>
                         <th>Fecha</th>
@@ -474,22 +511,7 @@
                         <th>Observación</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>25/11/2025</td>
-                        <td>Juan Pérez</td>
-                        <td>2ºA</td>
-                        <td>Asistió</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>25/11/2025</td>
-                        <td>Ana García</td>
-                        <td>2ºB</td>
-                        <td>Falta</td>
-                        <td>Sin justificar</td>
-                    </tr>
-                </tbody>
+                <tbody></tbody>
             </table>
         </section>
 
@@ -502,7 +524,7 @@
             </ul>
 
             <div class="galeria">
-                <!-- Imágenes de comunicados (cuando las agreguen) -->
+                <!-- Imágenes de comunicados cuando las agreguen -->
             </div>
         </section>
 
@@ -527,7 +549,7 @@
 
             <details>
                 <summary>¿Cada cuánto se actualizan las notas?</summary>
-                <p>Las notas generales se actualizan por trimestre, y en algunos casos con avances parciales.</p>
+                <p>Las notas generales se actualizan por trimestre, con posibles avances parciales.</p>
             </details>
 
             <details>
@@ -537,7 +559,7 @@
 
             <details>
                 <summary>¿Puedo compartir esta página?</summary>
-                <p>Se recomienda compartir el enlace solo con madres, padres o tutores autorizados de la comunidad educativa.</p>
+                <p>Se recomienda compartir el enlace solo con madres, padres o tutores autorizados.</p>
             </details>
         </section>
 
@@ -550,27 +572,73 @@
 
 <!-- JAVASCRIPT -->
 <script>
-// Códigos de acceso (cámbialos si deseas)
+// Códigos de acceso (pueden cambiarlos)
 const CODIGO_DOCENTE = "DOCENTE2025";
 const CODIGO_FAMILIA = "FAMILIA2025";
 
 let rolActual = null;
+let alumnoActual = null;
+let paraleloActual = null;
 
-// Datos de notas (ejemplos; reemplaza por tus estudiantes reales)
+// Nómina real: 2ºA
 const datosNotas2A = [
-    { alumno: "Juan Pérez",   area: "Comunicación", trimestre: "1º", nota: 85, obs: "Buen avance en lectura" },
-    { alumno: "Juan Pérez",   area: "Matemática",   trimestre: "1º", nota: 80, obs: "Resuelve operaciones básicas" },
-    { alumno: "María López",  area: "Comunicación", trimestre: "1º", nota: 90, obs: "Buena comprensión lectora" },
-    { alumno: "María López",  area: "Matemática",   trimestre: "1º", nota: 88, obs: "Participa con seguridad" }
+    { alumno: "Balderrama Choque Marcos Dyland", area: "General", trimestre: "-", nota: "", obs: "" },
+    { alumno: "Calle  Pariguana Zoe Sofia", area: "General", trimestre: "-", nota: "", obs: "" },
+    { alumno: "Cardenas Chacon Dimar Santos", area: "General", trimestre: "-", nota: "", obs: "" },
+    { alumno: "Ibañez Garnica Erik  Jhair", area: "General", trimestre: "-", nota: "", obs: "" },
+    { alumno: "Lopez Vega  Jonathan Joseph", area: "General", trimestre: "-", nota: "", obs: "" },
+    { alumno: "Lovera Revollo Nataly", area: "General", trimestre: "-", nota: "", obs: "" },
+    { alumno: "Male Rodas  Nazaline", area: "General", trimestre: "-", nota: "", obs: "" },
+    { alumno: "Mamani  Mendez Cristan", area: "General", trimestre: "-", nota: "", obs: "" },
+    { alumno: "Nuñez Lopez Luis Yair", area: "General", trimestre: "-", nota: "", obs: "" },
+    { alumno: "Ontiveros Rivera Erick Matias", area: "General", trimestre: "-", nota: "", obs: "" },
+    { alumno: "Ortega Rivera Marian Valentina", area: "General", trimestre: "-", nota: "", obs: "" },
+    { alumno: "Ortiz Encinas JhinaGuissel", area: "General", trimestre: "-", nota: "", obs: "" },
+    { alumno: "Poma  Vargas  Daira  Jasmin", area: "General", trimestre: "-", nota: "", obs: "" },
+    { alumno: "Ramos Miranda  Sofia", area: "General", trimestre: "-", nota: "", obs: "" },
+    { alumno: "Requelme Arancibia BRILLIT", area: "General", trimestre: "-", nota: "", obs: "" },
+    { alumno: "Rodas  Carballo Ayned  Masiel", area: "General", trimestre: "-", nota: "", obs: "" },
+    { alumno: "Ruiz Rodas  Aysel", area: "General", trimestre: "-", nota: "", obs: "" },
+    { alumno: "Solis  Salazar  Marilet", area: "General", trimestre: "-", nota: "", obs: "" },
+    { alumno: "Yamandiry Diaz  Liam  Abdiel", area: "General", trimestre: "-", nota: "", obs: "" }
 ];
 
+// Nómina real: 2ºB
 const datosNotas2B = [
-    { alumno: "Carlos Rojas", area: "Ciencias Naturales", trimestre: "1º", nota: 88, obs: "Muestra curiosidad científica" },
-    { alumno: "Carlos Rojas", area: "Comunicación",       trimestre: "1º", nota: 82, obs: "Mejora en lectura" },
-    { alumno: "Ana García",   area: "Comunicación",       trimestre: "1º", nota: 92, obs: "Excelente expresión oral" },
-    { alumno: "Ana García",   area: "Matemática",         trimestre: "1º", nota: 89, obs: "Buen razonamiento lógico" }
+    { alumno: "AGUILAR VALENTINA MARGARITA", area: "General", trimestre: "-", nota: "", obs: "" },
+    { alumno: "AVILA PLATA ERICK JHOEL", area: "General", trimestre: "-", nota: "", obs: "" },
+    { alumno: "AYLLON HINOJOSA MARINES", area: "General", trimestre: "-", nota: "", obs: "" },
+    { alumno: "BALLEJOS REVOLLO ALISON DANAE", area: "General", trimestre: "-", nota: "", obs: "" },
+    { alumno: "BARJA LOPEZ ZEINETH", area: "General", trimestre: "-", nota: "", obs: "" },
+    { alumno: "BELTRAN LOPEZ  STIVEN FRANCO", area: "General", trimestre: "-", nota: "", obs: "" },
+    { alumno: "CARBALLO BERAMENDI ISMAEL", area: "General", trimestre: "-", nota: "", obs: "" },
+    { alumno: "CHAVARRIA BARJA PAUL THIAGO", area: "General", trimestre: "-", nota: "", obs: "" },
+    { alumno: "COPA DIAZ CARLOS DANIEL", area: "General", trimestre: "-", nota: "", obs: "" },
+    { alumno: "FERNANDEZ VELASCO VAYOLET YARELY", area: "General", trimestre: "-", nota: "", obs: "" },
+    { alumno: "FLORES QUIROGA ALBARO AARON", area: "General", trimestre: "-", nota: "", obs: "" },
+    { alumno: "FLORES OVANDO RENE ALI ", area: "General", trimestre: "-", nota: "", obs: "" },
+    { alumno: "GONZALES PANIAGUA EMILY CRISTAL", area: "General", trimestre: "-", nota: "", obs: "" },
+    { alumno: "LOPEZ RODAS HESEL AINOHA", area: "General", trimestre: "-", nota: "", obs: "" },
+    { alumno: "MIRANDA RUIZ EITHAN", area: "General", trimestre: "-", nota: "", obs: "" },
+    { alumno: "ORTEGA MOLINA JHON MAICOL", area: "General", trimestre: "-", nota: "", obs: "" },
+    { alumno: "ORTIZ CEREZO FERNANDA", area: "General", trimestre: "-", nota: "", obs: "" },
+    { alumno: "PARDO PADILLA DANNELY SARAI", area: "General", trimestre: "-", nota: "", obs: "" },
+    { alumno: "QUISPE SANDOVAL JHOSEP", area: "General", trimestre: "-", nota: "", obs: "" },
+    { alumno: "RUIZ ALARCON ERICK MIJAEL", area: "General", trimestre: "-", nota: "", obs: "" },
+    { alumno: "SARDAN ZAMBRANA AYSEL DESIREE", area: "General", trimestre: "-", nota: "", obs: "" },
+    { alumno: "VEGA SALAZAR ANGEL GAEL ", area: "General", trimestre: "-", nota: "", obs: "" },
+    { alumno: "ZELAYA SALAZAR VICTORIA MASSIEL", area: "General", trimestre: "-", nota: "", obs: "" }
 ];
 
+// Asistencia (ejemplo; luego pueden ampliarlo)
+const datosAsistencia = [
+    { fecha: "25/11/2025", alumno: "Balderrama Choque Marcos Dyland", paralelo: "2ºA", estado: "Asistió", obs: "" },
+    { fecha: "25/11/2025", alumno: "Yamandiry Diaz  Liam  Abdiel", paralelo: "2ºA", estado: "Falta", obs: "Sin justificar" },
+    { fecha: "25/11/2025", alumno: "AGUILAR VALENTINA MARGARITA", paralelo: "2ºB", estado: "Asistió", obs: "" },
+    { fecha: "25/11/2025", alumno: "ZELAYA SALAZAR VICTORIA MASSIEL", paralelo: "2ºB", estado: "Falta", obs: "Justificada" }
+];
+
+// Utilidades
 function obtenerListaAlumnos(datos) {
     const nombres = datos.map(d => d.alumno);
     return Array.from(new Set(nombres)).sort();
@@ -637,6 +705,37 @@ function renderTablaNotas(tablaId, datos, filtroNombre = "") {
     });
 }
 
+function renderTablaAsistencia(filtroNombre = "") {
+    const tbody = document.querySelector("#tablaAsistencia tbody");
+    tbody.innerHTML = "";
+
+    const datosFiltrados = filtroNombre
+        ? datosAsistencia.filter(d => d.alumno === filtroNombre)
+        : datosAsistencia;
+
+    if (datosFiltrados.length === 0) {
+        const fila = document.createElement("tr");
+        const celda = document.createElement("td");
+        celda.colSpan = 5;
+        celda.textContent = "No hay registros para mostrar.";
+        fila.appendChild(celda);
+        tbody.appendChild(fila);
+        return;
+    }
+
+    datosFiltrados.forEach(d => {
+        const fila = document.createElement("tr");
+
+        ["fecha", "alumno", "paralelo", "estado", "obs"].forEach(campo => {
+            const c = document.createElement("td");
+            c.textContent = d[campo] || "";
+            fila.appendChild(c);
+        });
+
+        tbody.appendChild(fila);
+    });
+}
+
 // Manejo de acceso
 document.getElementById("btnIngresar").addEventListener("click", () => {
     const codigo = document.getElementById("codigoAcceso").value.trim();
@@ -654,35 +753,160 @@ document.getElementById("btnIngresar").addEventListener("click", () => {
     }
 
     if (!valido) {
-        mensajeError.textContent = "Código incorrecto. Por favor, verifique e intente nuevamente.";
+        mensajeError.textContent = "Código incorrecto. Verifique e intente nuevamente.";
         return;
     }
 
     mensajeError.textContent = "";
-    document.getElementById("pantalla-acceso").style.display = "none";
-    document.getElementById("app").style.display = "block";
 
-    const textoRol = document.getElementById("textoRol");
     if (rolActual === "docente") {
-        textoRol.textContent = "Acceso: Docente / Administrador";
+        document.getElementById("pantalla-acceso").style.display = "none";
+        document.getElementById("app").style.display = "block";
+        configurarVistaDocente();
     } else if (rolActual === "familia") {
-        textoRol.textContent = "Acceso: Madre, padre o tutor";
+        document.getElementById("pantalla-acceso").style.display = "none";
+        document.getElementById("pantalla-seleccionar-estudiante").style.display = "flex";
     }
 });
 
-// Inicializar tablas y filtros
-document.addEventListener("DOMContentLoaded", () => {
-    llenarSelectAlumnos("filtroAlumno2A", datosNotas2A);
+// Selección de estudiante para familias
+document.getElementById("btnContinuarFamilia").addEventListener("click", () => {
+    const select = document.getElementById("selectorEstudianteFamilia");
+    const mensajeError = document.getElementById("mensajeErrorFamilia");
+    const seleccionado = select.value;
+
+    if (!seleccionado) {
+        mensajeError.textContent = "Seleccione un estudiante para continuar.";
+        return;
+    }
+
+    mensajeError.textContent = "";
+    alumnoActual = seleccionado;
+
+    const estaEnA = datosNotas2A.some(d => d.alumno === alumnoActual);
+    paraleloActual = estaEnA ? "2ºA" : "2ºB";
+
+    document.getElementById("pantalla-seleccionar-estudiante").style.display = "none";
+    document.getElementById("app").style.display = "block";
+    configurarVistaFamilia();
+});
+
+// Configurar vista para DOCENTES (ven todo)
+function configurarVistaDocente() {
+    const textoRol = document.getElementById("textoRol");
+    const resumen = document.getElementById("resumenEstudiante");
+    resumen.style.display = "none";
+
+    textoRol.textContent = "Acceso: Docente / Administrador";
+
+    document.getElementById("filtros2A").style.display = "flex";
+    document.getElementById("filtros2B").style.display = "flex";
+    document.getElementById("textoNotas2A").textContent =
+        "Seleccione un estudiante para ver sus notas, o \"Todos\" para ver la lista completa.";
+    document.getElementById("textoNotas2B").textContent =
+        "Seleccione un estudiante para ver sus notas, o \"Todos\" para ver la lista completa.";
+
+    document.getElementById("a-notas").style.display = "block";
+    document.getElementById("b-notas").style.display = "block";
+    document.getElementById("a-tareas").style.display = "block";
+    document.getElementById("b-tareas").style.display = "block";
+
+    document.getElementById("linkNotas2A").style.display = "inline-block";
+    document.getElementById("linkNotas2B").style.display = "inline-block";
+    document.getElementById("linkTareas2A").style.display = "inline-block";
+    document.getElementById("linkTareas2B").style.display = "inline-block";
+
     renderTablaNotas("tablaNotas2A", datosNotas2A);
-    document.getElementById("filtroAlumno2A").addEventListener("change", (e) => {
-        renderTablaNotas("tablaNotas2A", datosNotas2A, e.target.value);
+    renderTablaNotas("tablaNotas2B", datosNotas2B);
+    renderTablaAsistencia("");
+}
+
+// Configurar vista para FAMILIA (solo un estudiante)
+function configurarVistaFamilia() {
+    const textoRol = document.getElementById("textoRol");
+    const resumen = document.getElementById("resumenEstudiante");
+
+    textoRol.textContent = `Acceso: Madre, padre o tutor`;
+    resumen.style.display = "block";
+    resumen.textContent = `Visualizando información de: ${alumnoActual} (${paraleloActual})`;
+
+    // Ocultar filtros de selección en notas
+    document.getElementById("filtros2A").style.display = "none";
+    document.getElementById("filtros2B").style.display = "none";
+
+    document.getElementById("textoNotas2A").textContent =
+        "Notas del estudiante seleccionado en el paralelo 2ºA.";
+    document.getElementById("textoNotas2B").textContent =
+        "Notas del estudiante seleccionado en el paralelo 2ºB.";
+
+    if (paraleloActual === "2ºA") {
+        document.getElementById("a-notas").style.display = "block";
+        document.getElementById("b-notas").style.display = "none";
+        document.getElementById("a-tareas").style.display = "block";
+        document.getElementById("b-tareas").style.display = "none";
+
+        document.getElementById("linkNotas2A").style.display = "inline-block";
+        document.getElementById("linkNotas2B").style.display = "none";
+        document.getElementById("linkTareas2A").style.display = "inline-block";
+        document.getElementById("linkTareas2B").style.display = "none";
+
+        renderTablaNotas("tablaNotas2A", datosNotas2A, alumnoActual);
+        renderTablaNotas("tablaNotas2B", datosNotas2B, ""); // Vacía, sección oculta
+    } else {
+        document.getElementById("a-notas").style.display = "none";
+        document.getElementById("b-notas").style.display = "block";
+        document.getElementById("a-tareas").style.display = "none";
+        document.getElementById("b-tareas").style.display = "block";
+
+        document.getElementById("linkNotas2A").style.display = "none";
+        document.getElementById("linkNotas2B").style.display = "inline-block";
+        document.getElementById("linkTareas2A").style.display = "none";
+        document.getElementById("linkTareas2B").style.display = "inline-block";
+
+        renderTablaNotas("tablaNotas2A", datosNotas2A, "");
+        renderTablaNotas("tablaNotas2B", datosNotas2B, alumnoActual);
+    }
+
+    renderTablaAsistencia(alumnoActual);
+}
+
+// Inicialización al cargar
+document.addEventListener("DOMContentLoaded", () => {
+    // Llenar selects de notas para docentes
+    llenarSelectAlumnos("filtroAlumno2A", datosNotas2A);
+    llenarSelectAlumnos("filtroAlumno2B", datosNotas2B);
+
+    // Listado combinado para el selector de familias
+    const todosLosAlumnos = obtenerListaAlumnos(datosNotas2A)
+        .concat(obtenerListaAlumnos(datosNotas2B));
+    const unico = Array.from(new Set(todosLosAlumnos)).sort();
+    const selectorFamilia = document.getElementById("selectorEstudianteFamilia");
+    const optVacio = document.createElement("option");
+    optVacio.value = "";
+    optVacio.textContent = "Seleccionar...";
+    selectorFamilia.appendChild(optVacio);
+    unico.forEach(nombre => {
+        const opt = document.createElement("option");
+        opt.value = nombre;
+        opt.textContent = nombre;
+        selectorFamilia.appendChild(opt);
     });
 
-    llenarSelectAlumnos("filtroAlumno2B", datosNotas2B);
-    renderTablaNotas("tablaNotas2B", datosNotas2B);
-    document.getElementById("filtroAlumno2B").addEventListener("change", (e) => {
-        renderTablaNotas("tablaNotas2B", datosNotas2B, e.target.value);
+    // Eventos de filtros para docentes
+    document.getElementById("filtroAlumno2A").addEventListener("change", (e) => {
+        const valor = e.target.value;
+        renderTablaNotas("tablaNotas2A", datosNotas2A, valor);
     });
+
+    document.getElementById("filtroAlumno2B").addEventListener("change", (e) => {
+        const valor = e.target.value;
+        renderTablaNotas("tablaNotas2B", datosNotas2B, valor);
+    });
+
+    // Render inicial (no visible hasta que entren)
+    renderTablaNotas("tablaNotas2A", datosNotas2A);
+    renderTablaNotas("tablaNotas2B", datosNotas2B);
+    renderTablaAsistencia("");
 });
 </script>
 
