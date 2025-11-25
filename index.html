@@ -243,6 +243,56 @@
             background: var(--color-secundario);
             color: var(--color-blanco);
         }
+        .panel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+        }
+        .panel-card {
+            border: 1px solid #bbdefb;
+            border-radius: 8px;
+            padding: 10px;
+            background: #f5f9ff;
+            font-size: 0.85rem;
+        }
+        .panel-card h3 {
+            margin-top: 0;
+            font-size: 0.95rem;
+            color: var(--color-primario);
+        }
+        .panel-card label {
+            display: block;
+            margin-top: 6px;
+            margin-bottom: 2px;
+            font-weight: bold;
+        }
+        .panel-card select,
+        .panel-card input,
+        .panel-card textarea {
+            width: 100%;
+            padding: 4px 6px;
+            font-size: 0.8rem;
+            border-radius: 4px;
+            border: 1px solid #bbb;
+        }
+        .panel-card button {
+            margin-top: 8px;
+            padding: 6px 10px;
+            border: none;
+            border-radius: 4px;
+            background: var(--color-primario);
+            color: var(--color-blanco);
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+        .panel-card button:hover {
+            background: var(--color-secundario);
+        }
+        .panel-ayuda {
+            font-size: 0.8rem;
+            color: #555;
+            margin-top: 5px;
+        }
         footer {
             background: var(--color-primario);
             color: var(--color-blanco);
@@ -310,6 +360,7 @@
         <a href="#comunicados">Comunicados</a>
         <a href="#material">Material de apoyo</a>
         <a href="#faq">Preguntas frecuentes</a>
+        <a href="#panel-docente" id="linkPanelDocente" style="display:none;">Panel docente</a>
     </nav>
 
     <div class="container">
@@ -337,7 +388,7 @@
             </p>
             <p>Desde aquí podrán revisar:</p>
             <ul>
-                <li>Notas por área y trimestre.</li>
+                <li>Notas por área y trimestre (Ser, Saber, Hacer, Decidir y nota final).</li>
                 <li>Tareas vigentes y fechas de entrega.</li>
                 <li>Asistencia y observaciones generales.</li>
                 <li>Comunicados y avisos importantes.</li>
@@ -359,7 +410,7 @@
                 </li>
                 <li>
                     <b>Actualización</b><br>
-                    Las notas se actualizan por trimestre; las tareas y la asistencia, de forma periódica.
+                    Las notas se organizan por trimestre (1º y 2º) y por áreas.
                 </li>
                 <li>
                     <b>Uso responsable</b><br>
@@ -376,7 +427,7 @@
         <section id="a-notas" class="card">
             <h2>Notas - 2ºA</h2>
             <p class="info" id="textoNotas2A">
-                Filtros de estudiante, trimestre y área.
+                Filtros de estudiante, trimestre y área. Las calificaciones se muestran por competencias: Ser, Saber, Hacer y Decidir.
             </p>
 
             <div class="filtros" id="filtros2A">
@@ -388,13 +439,11 @@
                     <option value="">Todos</option>
                     <option value="1º">1º</option>
                     <option value="2º">2º</option>
-                    <option value="3º">3º</option>
                 </select>
 
                 <label for="filtroArea2A">Área:</label>
                 <select id="filtroArea2A">
                     <option value="">Todas</option>
-                    <option value="General">General</option>
                     <option value="Matemática">Matemática</option>
                     <option value="Lenguaje">Lenguaje</option>
                     <option value="Ciencias Sociales">Ciencias Sociales</option>
@@ -409,7 +458,11 @@
                         <th>Estudiante</th>
                         <th>Área</th>
                         <th>Trimestre</th>
-                        <th>Nota</th>
+                        <th>Ser</th>
+                        <th>Saber</th>
+                        <th>Hacer</th>
+                        <th>Decidir</th>
+                        <th>Nota final</th>
                         <th>Observación</th>
                     </tr>
                 </thead>
@@ -421,7 +474,7 @@
         <section id="b-notas" class="card">
             <h2>Notas - 2ºB</h2>
             <p class="info" id="textoNotas2B">
-                Filtros de estudiante, trimestre y área.
+                Filtros de estudiante, trimestre y área. Las calificaciones se muestran por competencias: Ser, Saber, Hacer y Decidir.
             </p>
 
             <div class="filtros" id="filtros2B">
@@ -433,13 +486,11 @@
                     <option value="">Todos</option>
                     <option value="1º">1º</option>
                     <option value="2º">2º</option>
-                    <option value="3º">3º</option>
                 </select>
 
                 <label for="filtroArea2B">Área:</label>
                 <select id="filtroArea2B">
                     <option value="">Todas</option>
-                    <option value="General">General</option>
                     <option value="Matemática">Matemática</option>
                     <option value="Lenguaje">Lenguaje</option>
                     <option value="Ciencias Sociales">Ciencias Sociales</option>
@@ -454,7 +505,11 @@
                         <th>Estudiante</th>
                         <th>Área</th>
                         <th>Trimestre</th>
-                        <th>Nota</th>
+                        <th>Ser</th>
+                        <th>Saber</th>
+                        <th>Hacer</th>
+                        <th>Decidir</th>
+                        <th>Nota final</th>
                         <th>Observación</th>
                     </tr>
                 </thead>
@@ -567,6 +622,79 @@
                 </thead>
                 <tbody></tbody>
             </table>
+        </section>
+
+        <!-- PANEL DOCENTE (EDICIÓN EN LA PÁGINA) -->
+        <section id="panel-docente" class="card" style="display:none;">
+            <h2>Panel docente (edición rápida)</h2>
+            <p class="info">
+                Los cambios que realice aquí se aplican en la página mientras esté abierta.
+                Al recargar, se pierden (porque la plataforma es estática).  
+                Para hacerlos permanentes, luego se deben actualizar los datos en el archivo de la página
+                o usar el botón de descarga para guardar un respaldo en JSON.
+            </p>
+
+            <div class="panel-grid">
+                <!-- Bloque para edición de notas -->
+                <div class="panel-card">
+                    <h3>Registrar / actualizar nota</h3>
+                    <label for="panelParalelo">Paralelo</label>
+                    <select id="panelParalelo">
+                        <option value="2ºA">2ºA</option>
+                        <option value="2ºB">2ºB</option>
+                    </select>
+
+                    <label for="panelAlumno">Estudiante</label>
+                    <select id="panelAlumno"></select>
+
+                    <label for="panelTrimestre">Trimestre</label>
+                    <select id="panelTrimestre">
+                        <option value="1º">1º</option>
+                        <option value="2º">2º</option>
+                    </select>
+
+                    <label for="panelArea">Área</label>
+                    <select id="panelArea">
+                        <option value="Matemática">Matemática</option>
+                        <option value="Lenguaje">Lenguaje</option>
+                        <option value="Ciencias Sociales">Ciencias Sociales</option>
+                        <option value="Ciencias Naturales">Ciencias Naturales</option>
+                        <option value="Artes Plásticas">Artes Plásticas</option>
+                    </select>
+
+                    <label>Ser</label>
+                    <input type="number" id="panelSer" min="0" max="100" step="1" placeholder="0 a 100">
+
+                    <label>Saber</label>
+                    <input type="number" id="panelSaber" min="0" max="100" step="1" placeholder="0 a 100">
+
+                    <label>Hacer</label>
+                    <input type="number" id="panelHacer" min="0" max="100" step="1" placeholder="0 a 100">
+
+                    <label>Decidir</label>
+                    <input type="number" id="panelDecidir" min="0" max="100" step="1" placeholder="0 a 100">
+
+                    <button type="button" id="btnGuardarNota">Guardar nota</button>
+                    <div class="panel-ayuda">
+                        La nota final se calcula automáticamente como promedio de Ser, Saber, Hacer y Decidir.
+                        La observación también se genera según la nota final.
+                    </div>
+                </div>
+
+                <!-- Bloque exportación JSON -->
+                <div class="panel-card">
+                    <h3>Respaldo de datos (JSON)</h3>
+                    <p class="panel-ayuda">
+                        Use este botón para descargar un archivo con todas las notas (2ºA y 2ºB)
+                        y el registro de asistencia actual.
+                    </p>
+                    <button type="button" id="btnDescargarJSON">Descargar datos (JSON)</button>
+                    <p class="panel-ayuda">
+                        Luego puede abrir ese archivo y copiar/pegar los arreglos en el código fuente
+                        para guardar cambios de forma permanente.
+                    </p>
+                </div>
+            </div>
         </section>
 
         <!-- COMUNICADOS -->
@@ -693,54 +821,137 @@ registrarCodigo("Sardan Aysel", "SARDAN ZAMBRANA AYSEL DESIREE", "2ºB");
 registrarCodigo("Vega Angel", "VEGA SALAZAR ANGEL GAEL ", "2ºB");
 registrarCodigo("Zelaya Victoria", "ZELAYA SALAZAR VICTORIA MASSIEL", "2ºB");
 
-// Datos base de notas (pueden editar trimestre, área, nota, obs)
-const datosNotas2A = [
-    { alumno: "Balderrama Choque Marcos Dyland", area: "General", trimestre: "-", nota: "", obs: "" },
-    { alumno: "Calle  Pariguana Zoe Sofia", area: "General", trimestre: "-", nota: "", obs: "" },
-    { alumno: "Cardenas Chacon Dimar Santos", area: "General", trimestre: "-", nota: "", obs: "" },
-    { alumno: "Ibañez Garnica Erik  Jhair", area: "General", trimestre: "-", nota: "", obs: "" },
-    { alumno: "Lopez Vega  Jonathan Joseph", area: "General", trimestre: "-", nota: "", obs: "" },
-    { alumno: "Lovera Revollo Nataly", area: "General", trimestre: "-", nota: "", obs: "" },
-    { alumno: "Male Rodas  Nazaline", area: "General", trimestre: "-", nota: "", obs: "" },
-    { alumno: "Mamani  Mendez Cristan", area: "General", trimestre: "-", nota: "", obs: "" },
-    { alumno: "Nuñez Lopez Luis Yair", area: "General", trimestre: "-", nota: "", obs: "" },
-    { alumno: "Ontiveros Rivera Erick Matias", area: "General", trimestre: "-", nota: "", obs: "" },
-    { alumno: "Ortega Rivera Marian Valentina", area: "General", trimestre: "-", nota: "", obs: "" },
-    { alumno: "Ortiz Encinas JhinaGuissel", area: "General", trimestre: "-", nota: "", obs: "" },
-    { alumno: "Poma  Vargas  Daira  Jasmin", area: "General", trimestre: "-", nota: "", obs: "" },
-    { alumno: "Ramos Miranda  Sofia", area: "General", trimestre: "-", nota: "", obs: "" },
-    { alumno: "Requelme Arancibia BRILLIT", area: "General", trimestre: "-", nota: "", obs: "" },
-    { alumno: "Rodas  Carballo Ayned  Masiel", area: "General", trimestre: "-", nota: "", obs: "" },
-    { alumno: "Ruiz Rodas  Aysel", area: "General", trimestre: "-", nota: "", obs: "" },
-    { alumno: "Solis  Salazar  Marilet", area: "General", trimestre: "-", nota: "", obs: "" },
-    { alumno: "Yamandiry Diaz  Liam  Abdiel", area: "General", trimestre: "-", nota: "", obs: "" }
+// Listas de alumnos
+const alumnos2A = [
+    "Balderrama Choque Marcos Dyland",
+    "Calle  Pariguana Zoe Sofia",
+    "Cardenas Chacon Dimar Santos",
+    "Ibañez Garnica Erik  Jhair",
+    "Lopez Vega  Jonathan Joseph",
+    "Lovera Revollo Nataly",
+    "Male Rodas  Nazaline",
+    "Mamani  Mendez Cristan",
+    "Nuñez Lopez Luis Yair",
+    "Ontiveros Rivera Erick Matias",
+    "Ortega Rivera Marian Valentina",
+    "Ortiz Encinas JhinaGuissel",
+    "Poma  Vargas  Daira  Jasmin",
+    "Ramos Miranda  Sofia",
+    "Requelme Arancibia BRILLIT",
+    "Rodas  Carballo Ayned  Masiel",
+    "Ruiz Rodas  Aysel",
+    "Solis  Salazar  Marilet",
+    "Yamandiry Diaz  Liam  Abdiel"
 ];
 
-const datosNotas2B = [
-    { alumno: "AGUILAR VALENTINA MARGARITA", area: "General", trimestre: "-", nota: "", obs: "" },
-    { alumno: "AVILA PLATA ERICK JHOEL", area: "General", trimestre: "-", nota: "", obs: "" },
-    { alumno: "AYLLON HINOJOSA MARINES", area: "General", trimestre: "-", nota: "", obs: "" },
-    { alumno: "BALLEJOS REVOLLO ALISON DANAE", area: "General", trimestre: "-", nota: "", obs: "" },
-    { alumno: "BARJA LOPEZ ZEINETH", area: "General", trimestre: "-", nota: "", obs: "" },
-    { alumno: "BELTRAN LOPEZ  STIVEN FRANCO", area: "General", trimestre: "-", nota: "", obs: "" },
-    { alumno: "CARBALLO BERAMENDI ISMAEL", area: "General", trimestre: "-", nota: "", obs: "" },
-    { alumno: "CHAVARRIA BARJA PAUL THIAGO", area: "General", trimestre: "-", nota: "", obs: "" },
-    { alumno: "COPA DIAZ CARLOS DANIEL", area: "General", trimestre: "-", nota: "", obs: "" },
-    { alumno: "FERNANDEZ VELASCO VAYOLET YARELY", area: "General", trimestre: "-", nota: "", obs: "" },
-    { alumno: "FLORES QUIROGA ALBARO AARON", area: "General", trimestre: "-", nota: "", obs: "" },
-    { alumno: "FLORES OVANDO RENE ALI ", area: "General", trimestre: "-", nota: "", obs: "" },
-    { alumno: "GONZALES PANIAGUA EMILY CRISTAL", area: "General", trimestre: "-", nota: "", obs: "" },
-    { alumno: "LOPEZ RODAS HESEL AINOHA", area: "General", trimestre: "-", nota: "", obs: "" },
-    { alumno: "MIRANDA RUIZ EITHAN", area: "General", trimestre: "-", nota: "", obs: "" },
-    { alumno: "ORTEGA MOLINA JHON MAICOL", area: "General", trimestre: "-", nota: "", obs: "" },
-    { alumno: "ORTIZ CEREZO FERNANDA", area: "General", trimestre: "-", nota: "", obs: "" },
-    { alumno: "PARDO PADILLA DANNELY SARAI", area: "General", trimestre: "-", nota: "", obs: "" },
-    { alumno: "QUISPE SANDOVAL JHOSEP", area: "General", trimestre: "-", nota: "", obs: "" },
-    { alumno: "RUIZ ALARCON ERICK MIJAEL", area: "General", trimestre: "-", nota: "", obs: "" },
-    { alumno: "SARDAN ZAMBRANA AYSEL DESIREE", area: "General", trimestre: "-", nota: "", obs: "" },
-    { alumno: "VEGA SALAZAR ANGEL GAEL ", area: "General", trimestre: "-", nota: "", obs: "" },
-    { alumno: "ZELAYA SALAZAR VICTORIA MASSIEL", area: "General", trimestre: "-", nota: "", obs: "" }
+const alumnos2B = [
+    "AGUILAR VALENTINA MARGARITA",
+    "AVILA PLATA ERICK JHOEL",
+    "AYLLON HINOJOSA MARINES",
+    "BALLEJOS REVOLLO ALISON DANAE",
+    "BARJA LOPEZ ZEINETH",
+    "BELTRAN LOPEZ  STIVEN FRANCO",
+    "CARBALLO BERAMENDI ISMAEL",
+    "CHAVARRIA BARJA PAUL THIAGO",
+    "COPA DIAZ CARLOS DANIEL",
+    "FERNANDEZ VELASCO VAYOLET YARELY",
+    "FLORES QUIROGA ALBARO AARON",
+    "FLORES OVANDO RENE ALI ",
+    "GONZALES PANIAGUA EMILY CRISTAL",
+    "LOPEZ RODAS HESEL AINOHA",
+    "MIRANDA RUIZ EITHAN",
+    "ORTEGA MOLINA JHON MAICOL",
+    "ORTIZ CEREZO FERNANDA",
+    "PARDO PADILLA DANNELY SARAI",
+    "QUISPE SANDOVAL JHOSEP",
+    "RUIZ ALARCON ERICK MIJAEL",
+    "SARDAN ZAMBRANA AYSEL DESIREE",
+    "VEGA SALAZAR ANGEL GAEL ",
+    "ZELAYA SALAZAR VICTORIA MASSIEL"
 ];
+
+const areasCalificacion = [
+    "Matemática",
+    "Lenguaje",
+    "Ciencias Sociales",
+    "Ciencias Naturales",
+    "Artes Plásticas"
+];
+
+const trimestresCalificacion = ["1º", "2º"];
+
+// Arreglos de notas (se llenan con datos ficticios)
+const datosNotas2A = [];
+const datosNotas2B = [];
+
+// Generar observación según nota
+function generarObservacion(nota, area) {
+    if (nota >= 60) {
+        return `Estudiante aprobado en ${area}. Se recomienda continuar fortaleciendo sus logros y mantener el compromiso.`;
+    } else {
+        return `Nota por debajo de lo esperado en ${area}. Se sugiere reforzar las tareas, el estudio en casa y pedir apoyo cuando lo necesite.`;
+    }
+}
+
+// Generar datos ficticios para todos los estudiantes (1º y 2º trimestre, todas las áreas)
+function generarNotasIniciales() {
+    function randomNota() {
+        return Math.floor(Math.random() * 100) + 1; // 1 a 100
+    }
+
+    alumnos2A.forEach(alumno => {
+        trimestresCalificacion.forEach(trim => {
+            areasCalificacion.forEach(area => {
+                const ser = randomNota();
+                const saber = randomNota();
+                const hacer = randomNota();
+                const decidir = randomNota();
+                const notaFinal = Math.round((ser + saber + hacer + decidir) / 4);
+                const obs = generarObservacion(notaFinal, area);
+
+                datosNotas2A.push({
+                    alumno,
+                    area,
+                    trimestre: trim,
+                    ser,
+                    saber,
+                    hacer,
+                    decidir,
+                    nota: notaFinal,
+                    obs
+                });
+            });
+        });
+    });
+
+    alumnos2B.forEach(alumno => {
+        trimestresCalificacion.forEach(trim => {
+            areasCalificacion.forEach(area => {
+                const ser = randomNota();
+                const saber = randomNota();
+                const hacer = randomNota();
+                const decidir = randomNota();
+                const notaFinal = Math.round((ser + saber + hacer + decidir) / 4);
+                const obs = generarObservacion(notaFinal, area);
+
+                datosNotas2B.push({
+                    alumno,
+                    area,
+                    trimestre: trim,
+                    ser,
+                    saber,
+                    hacer,
+                    decidir,
+                    nota: notaFinal,
+                    obs
+                });
+            });
+        });
+    });
+}
+
+// Generar datos ficticios al cargar el script
+generarNotasIniciales();
 
 // Asistencia (ejemplo, editable)
 const datosAsistencia = [
@@ -791,7 +1002,7 @@ function renderTablaNotas(tablaId, datos, filtros = {}) {
     if (datosFiltrados.length === 0) {
         const fila = document.createElement("tr");
         const celda = document.createElement("td");
-        celda.colSpan = 5;
+        celda.colSpan = 9;
         celda.textContent = "No hay registros para mostrar.";
         fila.appendChild(celda);
         tbody.appendChild(fila);
@@ -812,6 +1023,22 @@ function renderTablaNotas(tablaId, datos, filtros = {}) {
         const cTrim = document.createElement("td");
         cTrim.textContent = d.trimestre;
         fila.appendChild(cTrim);
+
+        const cSer = document.createElement("td");
+        cSer.textContent = d.ser;
+        fila.appendChild(cSer);
+
+        const cSaber = document.createElement("td");
+        cSaber.textContent = d.saber;
+        fila.appendChild(cSaber);
+
+        const cHacer = document.createElement("td");
+        cHacer.textContent = d.hacer;
+        fila.appendChild(cHacer);
+
+        const cDecidir = document.createElement("td");
+        cDecidir.textContent = d.decidir;
+        fila.appendChild(cDecidir);
 
         const cNota = document.createElement("td");
         cNota.textContent = d.nota;
@@ -966,6 +1193,8 @@ function configurarVistaDocente() {
     document.getElementById("b-notas").style.display = "block";
     document.getElementById("a-tareas").style.display = "block";
     document.getElementById("b-tareas").style.display = "block";
+    document.getElementById("panel-docente").style.display = "block";
+    document.getElementById("linkPanelDocente").style.display = "inline-block";
 
     document.getElementById("linkNotas2A").style.display = "inline-block";
     document.getElementById("linkNotas2B").style.display = "inline-block";
@@ -975,6 +1204,9 @@ function configurarVistaDocente() {
     actualizarNotas2A();
     actualizarNotas2B();
     renderTablaAsistencia("");
+
+    // Inicializar lista de alumnos en panel docente
+    actualizarListaPanelAlumnos();
 }
 
 // Configurar vista para FAMILIA
@@ -985,6 +1217,9 @@ function configurarVistaFamilia() {
     textoRol.textContent = "Acceso: Madre, padre o tutor";
     resumen.style.display = "block";
     resumen.textContent = `Visualizando información de: ${alumnoActual} (${paraleloActual})`;
+
+    document.getElementById("panel-docente").style.display = "none";
+    document.getElementById("linkPanelDocente").style.display = "none";
 
     // Ocultamos selector de alumno, pero mantenemos trimestre/área
     const selectAlumno2A = document.getElementById("filtroAlumno2A");
@@ -1056,6 +1291,116 @@ document.getElementById("btnIngresar").addEventListener("click", () => {
     }
 });
 
+// Panel docente: lista de alumnos según paralelo
+function actualizarListaPanelAlumnos() {
+    const paralelo = document.getElementById("panelParalelo").value;
+    const select = document.getElementById("panelAlumno");
+    const datos = paralelo === "2ºA" ? datosNotas2A : datosNotas2B;
+
+    select.innerHTML = "";
+    obtenerListaAlumnos(datos).forEach(nombre => {
+        const opt = document.createElement("option");
+        opt.value = nombre;
+        opt.textContent = nombre;
+        select.appendChild(opt);
+    });
+}
+
+// Panel docente: guardar/actualizar nota (Ser, Saber, Hacer, Decidir)
+function guardarNotaDesdePanel() {
+    const paralelo = document.getElementById("panelParalelo").value;
+    const alumno = document.getElementById("panelAlumno").value;
+    const trimestre = document.getElementById("panelTrimestre").value;
+    const area = document.getElementById("panelArea").value;
+
+    const serStr = document.getElementById("panelSer").value.trim();
+    const saberStr = document.getElementById("panelSaber").value.trim();
+    const hacerStr = document.getElementById("panelHacer").value.trim();
+    const decidirStr = document.getElementById("panelDecidir").value.trim();
+
+    if (!alumno || !trimestre || !area || !serStr || !saberStr || !hacerStr || !decidirStr) {
+        alert("Complete paralelo, estudiante, trimestre, área y las cuatro notas (Ser, Saber, Hacer, Decidir).");
+        return;
+    }
+
+    const ser = Number(serStr);
+    const saber = Number(saberStr);
+    const hacer = Number(hacerStr);
+    const decidir = Number(decidirStr);
+
+    if ([ser, saber, hacer, decidir].some(v => isNaN(v) || v < 0 || v > 100)) {
+        alert("Todas las notas deben ser números entre 0 y 100.");
+        return;
+    }
+
+    const notaFinal = Math.round((ser + saber + hacer + decidir) / 4);
+    const obs = generarObservacion(notaFinal, area);
+
+    const arreglo = paralelo === "2ºA" ? datosNotas2A : datosNotas2B;
+
+    // Buscar si ya existe registro para ese alumno+trimestre+área
+    const existente = arreglo.find(reg =>
+        reg.alumno === alumno &&
+        reg.trimestre === trimestre &&
+        reg.area === area
+    );
+
+    if (existente) {
+        existente.ser = ser;
+        existente.saber = saber;
+        existente.hacer = hacer;
+        existente.decidir = decidir;
+        existente.nota = notaFinal;
+        existente.obs = obs;
+    } else {
+        arreglo.push({
+            alumno,
+            area,
+            trimestre,
+            ser,
+            saber,
+            hacer,
+            decidir,
+            nota: notaFinal,
+            obs
+        });
+    }
+
+    // Refrescar tablas
+    actualizarNotas2A();
+    actualizarNotas2B();
+
+    alert(`Nota registrada/actualizada. Nota final: ${notaFinal}`);
+}
+
+// Panel docente: descargar JSON con notas y asistencia
+function descargarJSONDatos() {
+    const datos = {
+        notas2A: datosNotas2A,
+        notas2B: datosNotas2B,
+        asistencia: datosAsistencia
+    };
+
+    const contenido = JSON.stringify(datos, null, 2);
+    const blob = new Blob([contenido], { type: "application/json" });
+
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+
+    const hoy = new Date();
+    const yyyy = hoy.getFullYear();
+    const mm = String(hoy.getMonth() + 1).padStart(2, "0");
+    const dd = String(hoy.getDate()).padStart(2, "0");
+    const nombreArchivo = `sanpiox-datos-${yyyy}-${mm}-${dd}.json`;
+
+    a.href = url;
+    a.download = nombreArchivo;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+}
+
 // Inicialización
 document.addEventListener("DOMContentLoaded", () => {
     // Selectores de alumnos para notas (modo docente)
@@ -1081,10 +1426,18 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Render inicial (no visible hasta que se ingrese)
+    // Panel docente: cambio de paralelo actualiza lista de alumnos
+    document.getElementById("panelParalelo").addEventListener("change", actualizarListaPanelAlumnos);
+    document.getElementById("btnGuardarNota").addEventListener("click", guardarNotaDesdePanel);
+    document.getElementById("btnDescargarJSON").addEventListener("click", descargarJSONDatos);
+
+    // Inicial: tablas base (aunque no visibles hasta ingresar)
     renderTablaNotas("tablaNotas2A", datosNotas2A, {});
     renderTablaNotas("tablaNotas2B", datosNotas2B, {});
     renderTablaAsistencia("");
+
+    // Inicializar lista de alumnos del panel (por defecto 2ºA)
+    actualizarListaPanelAlumnos();
 });
 </script>
 
