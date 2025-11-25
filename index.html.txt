@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>San Pio X Plataforma Escolar</title>
+    <style>
+        :root {
+            --color-primario: #0d47a1;   /* Azul fuerte */
+            --color-secundario: #1976d2; /* Azul medio */
+            --color-fondo: #e3f2fd;      /* Azul muy claro */
+            --color-texto: #333;
+            --color-blanco: #ffffff;
+        }
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: var(--color-fondo);
+            color: var(--color-texto);
+        }
+        header {
+            background: linear-gradient(135deg, var(--color-primario), var(--color-secundario));
+            color: var(--color-blanco);
+            padding: 20px;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+        header p {
+            margin: 5px 0 0;
+            font-size: 0.9rem;
+        }
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            background: var(--color-primario);
+        }
+        nav a {
+            color: var(--color-blanco);
+            padding: 10px 14px;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        nav a:hover {
+            background: var(--color-secundario);
+        }
+        .container {
+            padding: 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        h2 {
+            color: var(--color-primario);
+            margin-top: 0;
+        }
+        .card {
+            background: var(--color-blanco);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+        }
+        .card ul {
+            padding-left: 20px;
+        }
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.72rem;
+            background: var(--color-secundario);
+            color: var(--color-blanco);
+            margin-right: 6px;
+        }
+        .info {
+            font-size: 0.85rem;
+            color: #555;
+        }
+        .tabla-ejemplo {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+        .tabla-ejemplo th,
+        .tabla-ejemplo td {
+            border: 1px solid #ddd;
+            padding: 6px;
+            text-align: left;
+        }
+        .tabla-ejemplo th {
+            background: #bbdefb;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        details {
+            margin-top: 10px;
+        }
+        .alerta {
+            background: #fff3cd;
+            border-left: 4px solid #ffca2c;
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            margin-top: 10px;
+        }
+        .nota-docente {
+            background: #e3f2fd;
+            border-left: 4px solid var(--color-secundario);
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-top: 15px;
+        }
+
+        /* Portada / imagen principal */
+        .portada {
+            margin: 15px 0 10px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }
+        .portada img {
+            width: 100%;
+            display: block;
+        }
+        .portada-texto {
+            text-align: center;
+            font-size: 0.9rem;
+            margin-top: 5px;
+            color: #444;
+        }
+
+        /* Galería sencilla de imágenes */
+        .galeria {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .galeria img {
+            width: 100%;
+            border-radius: 8px;
+            border: 2px solid var(--color-blanco);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+        }
+
+        footer {
+            background: var(--color-primario);
+            color: var(--color-blanco);
+            text-align: center;
+            padding: 15px;
+            margin-top: 40px;
+            font-size: 0.8rem;
+        }
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 1.4rem;
+            }
+            nav a {
+                font-size: 0.8rem;
+                padding: 8px 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>San Pio X Plataforma Escolar</h1>
+    <p>2º Año - Paralelos A y B · Administrado por <b>William &amp; Franklin</b></p>
+</header>
+
+<nav>
+    <a href="#bienvenida">Inicio</a>
+    <a href="#guia">Guía para Padres</a>
+    <a href="#a-notas">Notas 2ºA</a>
+    <a href="#b-notas">Notas 2ºB</a>
+    <a href="#a-tareas">Tareas 2ºA</a>
+    <a href="#b-tareas">Tareas 2ºB</a>
+    <a href="#asistencia">Asistencia</a>
+    <a href="#comunicados">Comunicados</a>
+    <a href="#material">Material de apoyo</a>
+    <a href="#faq">Preguntas frecuentes</a>
+</nav>
+
+<div class="container">
+
+    <!-- PORTADA CON IMAGEN -->
+    <section class="card" id="portada">
+        <h2>Portada</h2>
+        <div class="portada">
+            <!-- 👉 AQUÍ CAMBIAS LA RUTA DE LA IMAGEN POR LA TUYA -->
+            <img src="imagenes/portada_sanpiox.jpg" alt="Portada Unidad Educativa San Pio X">
+        </div>
+        <p class="portada-texto">
+            (Reemplazar por una fotografía del colegio, logo institucional o imagen representativa de la comunidad educativa.)
+        </p>
+    </section>
+
+    <!-- BIENVENIDA -->
+    <section id="bienvenida" class="card">
+        <h2>Bienvenida</h2>
+        <p>
+            Estimadas madres y padres de familia:
+        </p>
+        <p>
+            Les damos la bienvenida a la <b>San Pio X Plataforma Escolar</b>, creada para fortalecer la comunicación
+            entre la unidad educativa y las familias, y para facilitar el seguimiento del proceso de aprendizaje
+            de sus hijas e hijos de <b>2º Año, paralelos A y B</b>.
+        </p>
+        <p>
+            Desde este espacio podrán revisar:
+        </p>
+        <ul>
+            <li>Notas por área y trimestre.</li>
+            <li>Tareas vigentes y fechas de entrega.</li>
+            <li>Asistencia, atrasos y observaciones generales.</li>
+            <li>Comunicados y avisos importantes.</li>
+            <li>Material de apoyo para acompañar el estudio en casa.</li>
+        </ul>
+        <p class="info">
+            La plataforma está diseñada para ser sencilla y accesible desde el celular o una computadora,
+            sin necesidad de instalar aplicaciones adicionales.
+        </p>
+    </section>
+
+    <!-- GUÍA PARA PADRES -->
+    <section id="guia" class="card">
+        <h2>Guía para Padres de Familia</h2>
+        <p>
+            Para utilizar correctamente la plataforma, tenga en cuenta las siguientes orientaciones:
+        </p>
+
+        <ol>
+            <li><b>Navegación básica</b><br>
+                Use el menú azul de la parte superior para ir directamente a:
+                <ul>
+                    <li><b>Notas 2ºA / 2ºB</b>: calificaciones por área y trimestre.</li>
+                    <li><b>Tareas 2ºA / 2ºB</b>: tareas actuales y próximas entregas.</li>
+                    <li><b>Asistencia</b>: registro de asistencia, faltas y atrasos.</li>
+                    <li><b>Comunicados</b>: avisos y circulares importantes.</li>
+                    <li><b>Material de apoyo</b>: guías y recursos descargables.</li>
+                </ul>
+            </li>
+            <li><b>Elegir el paralelo correcto</b><br>
+                Verifique siempre el paralelo de su hijo/a:
+                <span class="badge">2ºA</span>
+                <span class="badge">2ºB</span>
+                Si tiene más de un hijo/a en el grado, revise cada sección por separado.
+            </li>
+            <li><b>Frecuencia de actualización</b><br>
+                <ul>
+                    <li>Las <b>notas</b> se actualizan principalmente por trimestre.</li>
+                    <li>Las <b>tareas</b> se actualizan durante la semana, según el trabajo de aula.</li>
+                    <li>La <b>asistencia</b> se registra de manera periódica.</li>
+                </ul>
+            </li>
+            <li><b>Confidencialidad</b><br>
+                La información mostrada está pensada únicamente para uso de la comunidad educativa.
+                Evite compartir datos o capturas de pantalla de otros estudiantes.
+            </li>
+            <li><b>Comunicación con docentes</b><br>
+                Para dudas específicas sobre el rendimiento o la conducta de su hijo/a, comuníquese con los
+                docentes por los medios oficiales: reuniones, cuaderno de comunicados o canales autorizados.
+            </li>
+        </ol>
+
+        <div class="alerta">
+            <b>Importante:</b> No se requiere usuario ni contraseña.  
+            Solo necesita este enlace y conexión a internet para consultar la información.
+        </div>
+    </section>
+
+    <!-- NOTAS A -->
+    <section id="a-notas" class="card">
+        <h2>Notas - 2ºA</h2>
+        <p class="info">
+            Aquí se mostrarán las notas oficiales de los estudiantes del paralelo 2ºA.  
+            En la versión definitiva, esta sección puede conectarse a una hoja de cálculo (Google Sheets).
+        </p>
+
+        <table class="tabla-ejemplo">
+            <thead>
+                <tr>
+                    <th>Estudiante</th>
+                    <th>Área</th>
+                    <th>Trimestre</th>
+                    <th>Nota</th>
+                    <th>Observación</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Ejemplo: Juan Pérez</td>
+                    <td>Comunicación</td>
+                    <td>1º</td>
+                    <td>85</td>
+                    <td>Buen avance en lectura</td>
+                </tr>
+                <tr>
+                    <td>Ejemplo: María López</td>
+                    <td>Matemática</td>
+                    <td>1º</td>
+                    <td>90</td>
+                    <td>Participa con seguridad</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- CUANDO TENGAS LA HOJA DE GOOGLE SHEETS, PUEDES USAR:
+        <iframe src="AQUI_PONES_EL_LINK_DE_GOOGLE_SHEETS_2A_NOTAS"
+                width="100%" height="400"></iframe>
+        -->
+    </section>
+
+    <!-- NOTAS B -->
+    <section id="b-notas" class="card">
+        <h2>Notas - 2ºB</h2>
+        <p class="info">
+            Aquí se mostrarán las notas oficiales de los estudiantes del paralelo 2ºB.
+        </p>
+
+        <table class="tabla-ejemplo">
+            <thead>
+                <tr>
+                    <th>Estudiante</th>
+                    <th>Área</th>
+                    <th>Trimestre</th>
+                    <th>Nota</th>
+                    <th>Observación</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Ejemplo: Carlos Rojas</td>
+                    <td>Ciencias Naturales</td>
+                    <td>1º</td>
+                    <td>88</td>
+                    <td>Demuestra curiosidad científica</td>
+                </tr>
+                <tr>
+                    <td>Ejemplo: Ana García</td>
+                    <td>Comunicación</td>
+                    <td>1º</td>
+                    <td>92</td>
+                    <td>Excelente expresión oral</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- TAREAS A -->
+    <section id="a-tareas" class="card">
+        <h2>Tareas - 2ºA</h2>
+        <p class="info">
+            En esta sección se publican las tareas vigentes del paralelo 2ºA.
+        </p>
+
+        <table class="tabla-ejemplo">
+            <thead>
+                <tr>
+                    <th>Fecha asignación</th>
+                    <th>Fecha entrega</th>
+                    <th>Área</th>
+                    <th>Descripción</th>
+                    <th>Materiales</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>25/11/2025</td>
+                    <td>27/11/2025</td>
+                    <td>Comunicación</td>
+                    <td>Escribir 3 oraciones sobre su familia.</td>
+                    <td>Cuaderno, lápiz</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- TAREAS B -->
+    <section id="b-tareas" class="card">
+        <h2>Tareas - 2ºB</h2>
+        <p class="info">
+            En esta sección se publican las tareas vigentes del paralelo 2ºB.
+        </p>
+
+        <table class="tabla-ejemplo">
+            <thead>
+                <tr>
+                    <th>Fecha asignación</th>
+                    <th>Fecha entrega</th>
+                    <th>Área</th>
+                    <th>Descripción</th>
+                    <th>Materiales</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>26/11/2025</td>
+                    <td>28/11/2025</td>
+                    <td>Matemática</td>
+                    <td>Resolver 5 ejercicios de suma y resta.</td>
+                    <td>Cuaderno, lápiz, borrador</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- ASISTENCIA -->
+    <section id="asistencia" class="card">
+        <h2>Asistencia - 2ºA y 2ºB</h2>
+        <p class="info">
+            Resumen de asistencia de los estudiantes.  
+            Más adelante puede conectarse a una hoja de cálculo que contenga a ambos paralelos.
+        </p>
+
+        <table class="tabla-ejemplo">
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Estudiante</th>
+                    <th>Paralelo</th>
+                    <th>Estado</th>
+                    <th>Observación</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>25/11/2025</td>
+                    <td>Ejemplo: Juan Pérez</td>
+                    <td>2ºA</td>
+                    <td>Asistió</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>25/11/2025</td>
+                    <td>Ejemplo: Ana García</td>
+                    <td>2ºB</td>
+                    <td>Falta</td>
+                    <td>Sin justificar</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- COMUNICADOS -->
+    <section id="comunicados" class="card">
+        <h2>Comunicados</h2>
+        <p>
+            En esta sección se publican avisos importantes, convocatorias a reuniones, actividades especiales y otros comunicados.
+        </p>
+
+        <ul>
+            <li><b>[Ejemplo]</b> Reunión de padres de familia del paralelo 2ºA – 30/11/2025 a horas 18:00.</li>
+            <li><b>[Ejemplo]</b> Entrega de libretas del 1º trimestre – Fecha por confirmar.</li>
+        </ul>
+
+        <p class="info">
+            También pueden añadirse imágenes de afiches o comunicados oficiales:
+        </p>
+
+        <div class="galeria">
+            <!-- 👉 AQUÍ PUEDEN AGREGAR IMÁGENES DE COMUNICADOS EN JPG/PNG
+            <img src="imagenes/comunicado1.jpg" alt="Comunicado 1">
+            <img src="imagenes/comunicado2.jpg" alt="Comunicado 2">
+            -->
+        </div>
+    </section>
+
+    <!-- MATERIAL DE APOYO -->
+    <section id="material" class="card">
+        <h2>Material de apoyo</h2>
+        <p>
+            Desde aquí podrán acceder a materiales que les ayudarán a reforzar lo trabajado en clase:
+        </p>
+        <ul>
+            <li>Guías de lectura y escritura.</li>
+            <li>Fichas de operaciones básicas de matemática.</li>
+            <li>Enlaces a videos educativos seleccionados por los docentes.</li>
+        </ul>
+        <p class="info">
+            Pueden descargar los archivos y usarlos en casa con sus hijas e hijos.
+        </p>
+    </section>
+
+    <!-- PREGUNTAS FRECUENTES -->
+    <section id="faq" class="card">
+        <h2>Preguntas frecuentes (FAQ)</h2>
+
+        <details>
+            <summary>¿Debo iniciar sesión para ver la información?</summary>
+            <p>No. Solo necesita el enlace de esta página y conexión a internet. Toda la información es de consulta.</p>
+        </details>
+
+        <details>
+            <summary>¿Cada cuánto se actualizan las notas?</summary>
+            <p>Las notas generales se actualizan por trimestre. En algunos casos se podrán ir actualizando avances parciales.</p>
+        </details>
+
+        <details>
+            <summary>¿Qué hago si veo un error en los datos de mi hijo/a?</summary>
+            <p>Coméntelo directamente con los docentes en las reuniones o mediante los medios de comunicación oficiales de la unidad educativa.</p>
+        </details>
+
+        <details>
+            <summary>¿Puedo compartir esta página?</summary>
+            <p>Puede compartir el enlace únicamente con madres, padres o tutores autorizados de la comunidad educativa.</p>
+        </details>
+
+        <div class="nota-docente">
+            <b>Nota para William y Franklin:</b> pueden editar, agregar o quitar preguntas según la realidad del curso.  
+            Esta sección ayuda a aclarar dudas frecuentes sin saturar los canales de mensajería.
+        </div>
+    </section>
+
+</div>
+
+<footer>
+    San Pio X Plataforma Escolar · 2º Año A y B · Desarrollado por William &amp; Franklin
+</footer>
+
+</body>
+</html>
