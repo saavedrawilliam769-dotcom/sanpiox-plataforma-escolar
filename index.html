@@ -12,9 +12,7 @@
             --color-texto: #333;
             --color-blanco: #ffffff;
         }
-        * {
-            box-sizing: border-box;
-        }
+        * { box-sizing: border-box; }
         body {
             margin: 0;
             font-family: Arial, sans-serif;
@@ -47,9 +45,7 @@
             text-decoration: none;
             font-size: 0.9rem;
         }
-        nav a:hover {
-            background: var(--color-secundario);
-        }
+        nav a:hover { background: var(--color-secundario); }
         .container {
             padding: 20px;
             max-width: 1100px;
@@ -66,9 +62,7 @@
             margin-bottom: 20px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.08);
         }
-        .card ul {
-            padding-left: 20px;
-        }
+        .card ul { padding-left: 20px; }
         .badge {
             display: inline-block;
             padding: 3px 8px;
@@ -82,18 +76,18 @@
             font-size: 0.85rem;
             color: #555;
         }
-        .tabla-ejemplo {
+        .tabla {
             width: 100%;
             border-collapse: collapse;
             font-size: 0.85rem;
         }
-        .tabla-ejemplo th,
-        .tabla-ejemplo td {
+        .tabla th,
+        .tabla td {
             border: 1px solid #ddd;
             padding: 6px;
             text-align: left;
         }
-        .tabla-ejemplo th {
+        .tabla th {
             background: #bbdefb;
         }
         details summary {
@@ -101,9 +95,7 @@
             font-weight: bold;
             margin-bottom: 5px;
         }
-        details {
-            margin-top: 10px;
-        }
+        details { margin-top: 10px; }
         .alerta {
             background: #fff3cd;
             border-left: 4px solid #ffca2c;
@@ -120,7 +112,6 @@
             font-size: 0.8rem;
             margin-top: 15px;
         }
-
         /* Portada / imagen principal */
         .portada {
             margin: 15px 0 10px;
@@ -128,17 +119,13 @@
             overflow: hidden;
             box-shadow: 0 2px 6px rgba(0,0,0,0.15);
         }
-        .portada img {
-            width: 100%;
-            display: block;
-        }
+        .portada img { width: 100%; display: block; }
         .portada-texto {
             text-align: center;
             font-size: 0.9rem;
             margin-top: 5px;
             color: #444;
         }
-
         /* Galería sencilla de imágenes */
         .galeria {
             display: grid;
@@ -152,7 +139,19 @@
             border: 2px solid var(--color-blanco);
             box-shadow: 0 1px 4px rgba(0,0,0,0.15);
         }
-
+        .filtros {
+            margin: 10px 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+            font-size: 0.85rem;
+        }
+        .filtros label { font-weight: bold; }
+        .filtros select {
+            padding: 4px 6px;
+            font-size: 0.85rem;
+        }
         footer {
             background: var(--color-primario);
             color: var(--color-blanco);
@@ -162,12 +161,14 @@
             font-size: 0.8rem;
         }
         @media (max-width: 600px) {
-            header h1 {
-                font-size: 1.4rem;
-            }
+            header h1 { font-size: 1.4rem; }
             nav a {
                 font-size: 0.8rem;
                 padding: 8px 10px;
+            }
+            .filtros {
+                flex-direction: column;
+                align-items: flex-start;
             }
         }
     </style>
@@ -199,28 +200,24 @@
     <section class="card" id="portada">
         <h2>Portada</h2>
         <div class="portada">
-            <!-- 👉 Cuando tengas una imagen, crea una carpeta "imagenes" y cambias el src -->
+            <!-- Cuando tengas una imagen real, crea carpeta "imagenes" y cambia el src -->
             <img src="imagenes/portada-ejemplo.jpg" alt="Portada Unidad Educativa San Pio X">
         </div>
         <p class="portada-texto">
-            (Reemplazar por una fotografía del colegio, logo institucional o imagen representativa de la comunidad educativa.)
+            (Reemplace esta imagen por la fotografía del colegio, logo institucional o imagen representativa.)
         </p>
     </section>
 
     <!-- BIENVENIDA -->
     <section id="bienvenida" class="card">
         <h2>Bienvenida</h2>
-        <p>
-            Estimadas madres y padres de familia:
-        </p>
+        <p>Estimadas madres y padres de familia:</p>
         <p>
             Les damos la bienvenida a la <b>San Pio X Plataforma Escolar</b>, creada para fortalecer la comunicación
             entre la unidad educativa y las familias, y para facilitar el seguimiento del proceso de aprendizaje
             de sus hijas e hijos de <b>2º Año, paralelos A y B</b>.
         </p>
-        <p>
-            Desde este espacio podrán revisar:
-        </p>
+        <p>Desde este espacio podrán revisar:</p>
         <ul>
             <li>Notas por área y trimestre.</li>
             <li>Tareas vigentes y fechas de entrega.</li>
@@ -237,9 +234,7 @@
     <!-- GUÍA PARA PADRES -->
     <section id="guia" class="card">
         <h2>Guía para Padres de Familia</h2>
-        <p>
-            Para utilizar correctamente la plataforma, tenga en cuenta las siguientes orientaciones:
-        </p>
+        <p>Para utilizar correctamente la plataforma, tenga en cuenta las siguientes orientaciones:</p>
 
         <ol>
             <li><b>Navegación básica</b><br>
@@ -256,22 +251,19 @@
                 Verifique siempre el paralelo de su hijo/a:
                 <span class="badge">2ºA</span>
                 <span class="badge">2ºB</span>
-                Si tiene más de un hijo/a en el grado, revise cada sección por separado.
             </li>
             <li><b>Frecuencia de actualización</b><br>
                 <ul>
                     <li>Las <b>notas</b> se actualizan principalmente por trimestre.</li>
-                    <li>Las <b>tareas</b> se actualizan durante la semana, según el trabajo de aula.</li>
+                    <li>Las <b>tareas</b> se actualizan durante la semana.</li>
                     <li>La <b>asistencia</b> se registra de manera periódica.</li>
                 </ul>
             </li>
             <li><b>Confidencialidad</b><br>
-                La información mostrada está pensada únicamente para uso de la comunidad educativa.
-                Evite compartir datos o capturas de pantalla de otros estudiantes.
+                La información está pensada únicamente para la comunidad educativa. Evite compartir datos de otros estudiantes.
             </li>
             <li><b>Comunicación con docentes</b><br>
-                Para dudas específicas sobre el rendimiento o la conducta de su hijo/a, comuníquese con los
-                docentes por los medios oficiales: reuniones, cuaderno de comunicados o canales autorizados.
+                Para dudas específicas, comuníquese con los docentes por los medios oficiales de la unidad educativa.
             </li>
         </ol>
 
@@ -281,15 +273,21 @@
         </div>
     </section>
 
-    <!-- NOTAS A -->
+    <!-- NOTAS 2ºA -->
     <section id="a-notas" class="card">
         <h2>Notas - 2ºA</h2>
         <p class="info">
-            Aquí se mostrarán las notas oficiales de los estudiantes del paralelo 2ºA.  
-            Más adelante esta sección puede conectarse a una hoja de cálculo (Google Sheets).
+            Seleccione un estudiante para ver solo sus notas, o deje "Todos" para ver el listado completo.
         </p>
 
-        <table class="tabla-ejemplo">
+        <div class="filtros">
+            <label for="filtroAlumno2A">Estudiante:</label>
+            <select id="filtroAlumno2A">
+                <!-- Se rellena con JS -->
+            </select>
+        </div>
+
+        <table class="tabla" id="tablaNotas2A">
             <thead>
                 <tr>
                     <th>Estudiante</th>
@@ -300,32 +298,26 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Ejemplo: Juan Pérez</td>
-                    <td>Comunicación</td>
-                    <td>1º</td>
-                    <td>85</td>
-                    <td>Buen avance en lectura</td>
-                </tr>
-                <tr>
-                    <td>Ejemplo: María López</td>
-                    <td>Matemática</td>
-                    <td>1º</td>
-                    <td>90</td>
-                    <td>Participa con seguridad</td>
-                </tr>
+                <!-- Se rellena con JS -->
             </tbody>
         </table>
     </section>
 
-    <!-- NOTAS B -->
+    <!-- NOTAS 2ºB -->
     <section id="b-notas" class="card">
         <h2>Notas - 2ºB</h2>
         <p class="info">
-            Aquí se mostrarán las notas oficiales de los estudiantes del paralelo 2ºB.
+            Seleccione un estudiante para ver solo sus notas, o deje "Todos" para ver el listado completo.
         </p>
 
-        <table class="tabla-ejemplo">
+        <div class="filtros">
+            <label for="filtroAlumno2B">Estudiante:</label>
+            <select id="filtroAlumno2B">
+                <!-- Se rellena con JS -->
+            </select>
+        </div>
+
+        <table class="tabla" id="tablaNotas2B">
             <thead>
                 <tr>
                     <th>Estudiante</th>
@@ -336,32 +328,19 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Ejemplo: Carlos Rojas</td>
-                    <td>Ciencias Naturales</td>
-                    <td>1º</td>
-                    <td>88</td>
-                    <td>Demuestra curiosidad científica</td>
-                </tr>
-                <tr>
-                    <td>Ejemplo: Ana García</td>
-                    <td>Comunicación</td>
-                    <td>1º</td>
-                    <td>92</td>
-                    <td>Excelente expresión oral</td>
-                </tr>
+                <!-- Se rellena con JS -->
             </tbody>
         </table>
     </section>
 
-    <!-- TAREAS A -->
+    <!-- TAREAS 2ºA -->
     <section id="a-tareas" class="card">
         <h2>Tareas - 2ºA</h2>
         <p class="info">
-            En esta sección se publican las tareas vigentes del paralelo 2ºA.
+            Listado general de tareas vigentes del paralelo 2ºA.
         </p>
 
-        <table class="tabla-ejemplo">
+        <table class="tabla" id="tablaTareas2A">
             <thead>
                 <tr>
                     <th>Fecha asignación</th>
@@ -372,6 +351,7 @@
                 </tr>
             </thead>
             <tbody>
+                <!-- Se rellena con JS (si lo deseas en el futuro) -->
                 <tr>
                     <td>25/11/2025</td>
                     <td>27/11/2025</td>
@@ -383,14 +363,14 @@
         </table>
     </section>
 
-    <!-- TAREAS B -->
+    <!-- TAREAS 2ºB -->
     <section id="b-tareas" class="card">
         <h2>Tareas - 2ºB</h2>
         <p class="info">
-            En esta sección se publican las tareas vigentes del paralelo 2ºB.
+            Listado general de tareas vigentes del paralelo 2ºB.
         </p>
 
-        <table class="tabla-ejemplo">
+        <table class="tabla" id="tablaTareas2B">
             <thead>
                 <tr>
                     <th>Fecha asignación</th>
@@ -416,11 +396,10 @@
     <section id="asistencia" class="card">
         <h2>Asistencia - 2ºA y 2ºB</h2>
         <p class="info">
-            Resumen de asistencia de los estudiantes.  
-            Más adelante puede conectarse a una hoja de cálculo que contenga a ambos paralelos.
+            Resumen de asistencia de los estudiantes (ejemplo de estructura).
         </p>
 
-        <table class="tabla-ejemplo">
+        <table class="tabla">
             <thead>
                 <tr>
                     <th>Fecha</th>
@@ -466,7 +445,7 @@
         </p>
 
         <div class="galeria">
-            <!-- Ejemplo de uso futuro:
+            <!-- Ejemplo futuro:
             <img src="imagenes/comunicado1.jpg" alt="Comunicado 1">
             <img src="imagenes/comunicado2.jpg" alt="Comunicado 2">
             -->
@@ -514,8 +493,9 @@
         </details>
 
         <div class="nota-docente">
-            <b>Nota para William y Franklin:</b> pueden editar, agregar o quitar preguntas según la realidad del curso.  
-            Esta sección ayuda a aclarar dudas frecuentes sin saturar los canales de mensajería.
+            <b>Nota para William y Franklin:</b> los nombres y notas que se cargan en las secciones de 2ºA y 2ºB
+            pueden editarse en el bloque de JavaScript al final de este archivo, en los arreglos
+            <code>datosNotas2A</code> y <code>datosNotas2B</code>.
         </div>
     </section>
 
@@ -524,6 +504,119 @@
 <footer>
     San Pio X Plataforma Escolar · 2º Año A y B · Desarrollado por William &amp; Franklin
 </footer>
+
+<!-- ✅ JAVASCRIPT PARA INTERACTIVIDAD -->
+<script>
+/*
+    🔹 AQUÍ ES DONDE PONES LOS NOMBRES REALES DE TUS ESTUDIANTES Y SUS NOTAS 🔹
+
+    Solo reemplaza los ejemplos por tus datos.
+    Puedes agregar o quitar filas sin problema.
+*/
+
+const datosNotas2A = [
+    // EJEMPLOS - REEMPLAZA POR LOS NOMBRES REALES DE 2ºA
+    { alumno: "Juan Pérez",   area: "Comunicación",      trimestre: "1º", nota: 85, obs: "Buen avance en lectura" },
+    { alumno: "Juan Pérez",   area: "Matemática",        trimestre: "1º", nota: 80, obs: "Resuelve operaciones básicas" },
+    { alumno: "María López",  area: "Comunicación",      trimestre: "1º", nota: 90, obs: "Excelente expresión oral" },
+    { alumno: "María López",  area: "Matemática",        trimestre: "1º", nota: 88, obs: "Participa con seguridad" }
+];
+
+const datosNotas2B = [
+    // EJEMPLOS - REEMPLAZA POR LOS NOMBRES REALES DE 2ºB
+    { alumno: "Carlos Rojas", area: "Ciencias Naturales", trimestre: "1º", nota: 88, obs: "Curiosidad científica" },
+    { alumno: "Carlos Rojas", area: "Comunicación",       trimestre: "1º", nota: 82, obs: "Mejora en lectura" },
+    { alumno: "Ana García",   area: "Comunicación",       trimestre: "1º", nota: 92, obs: "Excelente expresión oral" },
+    { alumno: "Ana García",   area: "Matemática",         trimestre: "1º", nota: 89, obs: "Buen razonamiento lógico" }
+];
+
+// ---------- FUNCIONES GENERALES ----------
+
+function obtenerListaAlumnos(datos) {
+    const nombres = datos.map(d => d.alumno);
+    return Array.from(new Set(nombres)).sort(); // nombres únicos ordenados
+}
+
+function llenarSelectAlumnos(selectId, datos) {
+    const select = document.getElementById(selectId);
+    select.innerHTML = "";
+    const opcionTodos = document.createElement("option");
+    opcionTodos.value = "";
+    opcionTodos.textContent = "Todos los estudiantes";
+    select.appendChild(opcionTodos);
+
+    obtenerListaAlumnos(datos).forEach(nombre => {
+        const opt = document.createElement("option");
+        opt.value = nombre;
+        opt.textContent = nombre;
+        select.appendChild(opt);
+    });
+}
+
+function renderTablaNotas(tablaId, datos, filtroNombre = "") {
+    const tbody = document.querySelector(`#${tablaId} tbody`);
+    tbody.innerHTML = "";
+
+    const datosFiltrados = filtroNombre
+        ? datos.filter(d => d.alumno === filtroNombre)
+        : datos;
+
+    if (datosFiltrados.length === 0) {
+        const fila = document.createElement("tr");
+        const celda = document.createElement("td");
+        celda.colSpan = 5;
+        celda.textContent = "No hay registros para mostrar.";
+        fila.appendChild(celda);
+        tbody.appendChild(fila);
+        return;
+    }
+
+    datosFiltrados.forEach(d => {
+        const fila = document.createElement("tr");
+
+        const cAlumno = document.createElement("td");
+        cAlumno.textContent = d.alumno;
+        fila.appendChild(cAlumno);
+
+        const cArea = document.createElement("td");
+        cArea.textContent = d.area;
+        fila.appendChild(cArea);
+
+        const cTrim = document.createElement("td");
+        cTrim.textContent = d.trimestre;
+        fila.appendChild(cTrim);
+
+        const cNota = document.createElement("td");
+        cNota.textContent = d.nota;
+        fila.appendChild(cNota);
+
+        const cObs = document.createElement("td");
+        cObs.textContent = d.obs || "";
+        fila.appendChild(cObs);
+
+        tbody.appendChild(fila);
+    });
+}
+
+// ---------- INICIALIZACIÓN AL CARGAR LA PÁGINA ----------
+document.addEventListener("DOMContentLoaded", () => {
+    // 2ºA
+    llenarSelectAlumnos("filtroAlumno2A", datosNotas2A);
+    renderTablaNotas("tablaNotas2A", datosNotas2A);
+
+    document.getElementById("filtroAlumno2A").addEventListener("change", (e) => {
+        renderTablaNotas("tablaNotas2A", datosNotas2A, e.target.value);
+    });
+
+    // 2ºB
+    llenarSelectAlumnos("filtroAlumno2B", datosNotas2B);
+    renderTablaNotas("tablaNotas2B", datosNotas2B);
+
+    document.getElementById("filtroAlumno2B").addEventListener("change", (e) => {
+        renderTablaNotas("tablaNotas2B", datosNotas2B, e.target.value);
+    });
+});
+</script>
 
 </body>
 </html>
